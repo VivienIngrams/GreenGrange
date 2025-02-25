@@ -58,5 +58,11 @@ export const page = defineType({
         },
       },
     }),
+    defineField({
+      name: 'amenities',
+      title: 'Amenities',
+      type: 'amenities',
+      hidden: ({ document }) => document?.template !== 'rental'
+    })
   ],
 })
