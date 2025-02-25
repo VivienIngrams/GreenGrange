@@ -519,8 +519,8 @@ export type SitemapDataResult = Array<{
 // Query: *[_type == "amenities"][0] {    title,    description,    items[] {      name,      icon    }  }
 export type GetAmenitiesQueryResult = null;
 // Variable: getPhotosQuery
-// Query: *[_type == "photos"].images[].asset->url
-export type GetPhotosQueryResult = Array<never>;
+// Query: *[_type == "photos"][0] {    "images": images[].asset->url  }
+export type GetPhotosQueryResult = null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -529,6 +529,6 @@ declare module "@sanity/client" {
     "*[_type == \"settings\"][0]": SettingsQueryResult;
     "\n  *[_type == \"page\" || _type == \"post\" && defined(slug.current)] | order(_type asc) {\n    \"slug\": slug.current,\n    _type,\n    _updatedAt,\n  }\n": SitemapDataResult;
     "\n  *[_type == \"amenities\"][0] {\n    title,\n    description,\n    items[] {\n      name,\n      icon\n    }\n  }\n": GetAmenitiesQueryResult;
-    "\n *[_type == \"photos\"].images[].asset->url\n": GetPhotosQueryResult;
+    "\n  *[_type == \"photos\"][0] {\n    \"images\": images[].asset->url\n  }\n": GetPhotosQueryResult;
   }
 }
