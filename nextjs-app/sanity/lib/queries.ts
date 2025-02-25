@@ -29,3 +29,13 @@ export const getPhotosQuery = defineQuery(`
     "images": images[].asset->url
   }
 `)
+
+export const getInfoSectionsQuery = defineQuery(`
+    *[_type == "infoSection"] | order(order asc) {
+      identifier,
+      content,
+      linkText,
+    
+    }
+  `
+)

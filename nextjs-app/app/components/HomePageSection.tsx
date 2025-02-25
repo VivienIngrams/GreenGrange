@@ -1,22 +1,29 @@
+import { PortableText } from "@portabletext/react"
 import Link from "next/link"
+import { PortableTextBlock } from "@portabletext/react"
 
-interface HomePageSectionProps {
-  content: string
+interface InfoSectionData {
+  identifier: string
+  content: PortableTextBlock[]
   linkText: string
-  linkHref: string
+ 
+}
+
+interface InfoSectionProps {
+  data: InfoSectionData
   className?: string
 }
 
-// Named export
-export default function HomePageSection({ content, linkText, linkHref, className }: HomePageSectionProps) {
+export default function InfoSection({ data, className }: InfoSectionProps) {
   return (
     <div className={`p-6 bg-card rounded-lg shadow-sm ${className}`}>
-      <p className="text-card-foreground mb-4">{content}</p>
-      <Link href={linkHref} className="text-primary hover:underline inline-flex items-center">
-        {linkText}
+      <div className="prose prose-sm dark:prose-invert mb-4">
+        <PortableText value={data.content} />
+      </div>
+      <Link href={`/${data.identifier}`} className="text-primary hover:underline inline-flex items-center">
+        {data.linkText}
       </Link>
     </div>
   )
 }
-
 
