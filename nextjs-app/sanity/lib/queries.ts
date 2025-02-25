@@ -23,3 +23,9 @@ export const getAmenitiesQuery = defineQuery(`
     }
   }
 `)
+
+export const getPhotosQuery = defineQuery(`
+  *[_type == "photos"][0] {
+    "images": images[].asset->url
+  }
+`)
