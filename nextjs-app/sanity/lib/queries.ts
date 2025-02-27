@@ -31,11 +31,30 @@ export const getPhotosQuery = defineQuery(`
 `)
 
 export const getInfoSectionsQuery = defineQuery(`
-    *[_type == "infoSection"] | order(order asc) {
-      identifier,
-      content,
-      linkText,
-    
+  *[_type == "infoSection"] | order(order asc) {
+    identifier,
+    homepageContent,
+    linkText,
+  }
+`)
+
+export const getInfoSectionByIdQuery = defineQuery(`
+  *[_type == "infoSection" && identifier == $identifier][0] {
+    identifier,
+    homepageContent,
+    pageContent,
+    linkText,
+  }
+`)
+
+export const getAvailabilityQuery = defineQuery(`
+  *[_type == "availability"][0] {
+    title,
+    description,
+    unavailablePeriods[] {
+      from,
+      to,
+      note
     }
-  `
-)
+  }
+`)

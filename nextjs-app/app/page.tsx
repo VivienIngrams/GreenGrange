@@ -1,5 +1,4 @@
 import AvailabilityCalendar from "@/app/components/AvailabilityCalendar";
-import PhotoGallery from "@/app/components/PhotoGallery";
 import HeroSection from "@/app/components/HeroSection";
 import HomePageSection from "@/app/components/HomePageSection";
 import { PortableTextBlock } from "next-sanity";
@@ -24,15 +23,25 @@ export default async function HomePage() {
   return (
     <main className="min-h-screen">
       <HeroSection />
-      <PhotoGallery />
-      <div className="container mx-auto max-w-6xl px-6 py-12">
-        <div className="grid gap-8 ">
-          {infoSections.map((section: InfoSectionData) => (
-            <HomePageSection key={section.identifier} data={section} />
-          ))}
+      
+      {infoSections.map((section: InfoSectionData, index: number) => (
+        <div 
+          key={section.identifier}
+          className={`min-h-screen flex items-center justify-center ${
+            index % 2 === 0 ? 'bg-background' : 'bg-muted'
+          }`}
+        >
+          <div className="container max-w-6xl px-6">
+            <HomePageSection data={section} />
+          </div>
+        </div>
+      ))}
+
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="container max-w-6xl px-6">
+          <AvailabilityCalendar />
         </div>
       </div>
-      <AvailabilityCalendar />
     </main>
   );
 }

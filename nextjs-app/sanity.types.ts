@@ -524,6 +524,9 @@ export type GetPhotosQueryResult = null;
 // Variable: getInfoSectionsQuery
 // Query: *[_type == "infoSection"] | order(order asc) {      identifier,      content,      linkText,        }
 export type GetInfoSectionsQueryResult = Array<never>;
+// Variable: getAvailabilityQuery
+// Query: *[_type == "availability"][0] {    title,    description,    unavailableDates  }
+export type GetAvailabilityQueryResult = null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -534,5 +537,6 @@ declare module "@sanity/client" {
     "\n  *[_type == \"amenities\"][0] {\n    title,\n    description,\n    items[] {\n      name,\n      icon\n    }\n  }\n": GetAmenitiesQueryResult;
     "\n  *[_type == \"photos\"][0] {\n    \"images\": images[].asset->url\n  }\n": GetPhotosQueryResult;
     "\n    *[_type == \"infoSection\"] | order(order asc) {\n      identifier,\n      content,\n      linkText,\n    \n    }\n  ": GetInfoSectionsQueryResult;
+    "\n  *[_type == \"availability\"][0] {\n    title,\n    description,\n    unavailableDates\n  }\n": GetAvailabilityQueryResult;
   }
 }
