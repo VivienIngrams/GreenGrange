@@ -35,7 +35,7 @@ export default function AvailabilityCalendar() {
         />
       </div>
       <p className="mt-4 text-sm text-muted-foreground">
-        Dates marked in red are unavailable. Please contact us for booking inquiries.
+        Dates marked in red are unavailable
       </p>
     </section>
   )

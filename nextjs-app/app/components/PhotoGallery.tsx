@@ -19,7 +19,6 @@ export default async function PhotoGallery() {
  
   return (
     <section className="my-8">
-      <h2 className="text-2xl font-semibold mb-4">Photo Gallery</h2>
       <PhotoGrid images={photos.images} />
     </section>
   )

@@ -31,8 +31,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Mountain Retreat Rental",
-  description: "Luxurious mountain cabin rental with stunning views and modern amenities",
+  title: "The Green Grange",
+  description: "The Green Grange is a beautifully restored 18th-century eco-friendly barn in Gyé-sur-Seine, Champagne. A cozy retreat with local charm and nature at your doorstep.",
 };
 
 export default  async function RootLayout({
