@@ -24,11 +24,11 @@ import { handleError } from "./client-utils";
  */
 
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
+// const inter = Inter({
+//   variable: "--font-inter",
+//   subsets: ["latin"],
+//   display: "swap",
+// });
 
 export const metadata: Metadata = {
   title: "The Green Grange",
@@ -43,7 +43,7 @@ export default  async function RootLayout({
   const { isEnabled: isDraftMode } = await draftMode();
 
   return (
-    <html lang="en" suppressHydrationWarning className={cn(inter.variable, "min-h-screen bg-background antialiased")}>
+    <html lang="en" suppressHydrationWarning className={cn( "min-h-screen bg-background antialiased")}>
       <body>
         <ThemeProvider
           attribute="class"
