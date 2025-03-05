@@ -1,18 +1,17 @@
 import Image from "next/image";
 import { MapPin, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import background from "/hero-bg.jpg";
+import background from "../../public/hero-bg.jpg"; 
 
-console.log("background", background);
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center mb-24">
-      {/* Background Image */}
+      {/* Background Image using next/image */}
       <Image
-        src={background}
+        src={background} 
         alt="Hero Background"
-        layout="fill"
-        objectFit="cover"
+        layout="fill" 
+        objectFit="cover" 
         priority
         className="absolute inset-0 -z-10"
       />
@@ -22,7 +21,7 @@ export default function HeroSection() {
         <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-8">
           The Green Grange
         </h1>
-        <div className="inline-flex items-center gap-2 backdrop-blur-sm bg-black/30 px-4 py-2 rounded-full text-white">
+        <div className="inline-flex items-center gap-2 backdrop-blur-sm bg-green-500/10 px-4 py-2 rounded-full text-white hover:bg-green-500/20 transition-all hover:scale-[1.02] ">
           <MapPin className="h-5 w-5" />
           <Link
             href="https://maps.app.goo.gl/m4UppiXeNXT41AmN8"
@@ -38,3 +37,4 @@ export default function HeroSection() {
     </section>
   );
 }
+
