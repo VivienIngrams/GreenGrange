@@ -1,18 +1,18 @@
 import AvailabilityCalendar from "@/app/components/AvailabilityCalendar";
 import HeroSection from "@/app/components/HeroSection";
 import HomePageSection from "@/app/components/HomePageSection";
-import { PortableTextBlock } from "next-sanity";
+import { PortableTextBlock } from "@portabletext/react";
 import { getInfoSectionsQuery } from "@/sanity/lib/queries";
 import { client } from "@/sanity/lib/client";
 
-interface InfoSectionData {
+interface HomePageInfoSectionData {
   identifier: string;
-  content: PortableTextBlock[];
+  homepageContent: PortableTextBlock[];
   linkText: string;
 }
 
-async function getInfoSections(): Promise<InfoSectionData[]> {
-  const sections = await client.fetch<InfoSectionData[]>(getInfoSectionsQuery);
+async function getInfoSections(): Promise<HomePageInfoSectionData[]> {
+  const sections = await client.fetch<HomePageInfoSectionData[]>(getInfoSectionsQuery);
   if (!sections) throw new Error("Failed to fetch info sections");
   return sections;
 }
@@ -24,7 +24,7 @@ export default async function HomePage() {
     <main className="min-h-screen">
       <HeroSection />
       
-      {infoSections.map((section: InfoSectionData, index: number) => (
+      {infoSections.map((section: HomePageInfoSectionData, index: number) => (
         <div 
           key={section.identifier}
           className={`min-h-screen flex items-center justify-center ${

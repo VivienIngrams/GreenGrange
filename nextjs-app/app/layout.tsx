@@ -12,10 +12,8 @@ import { cn } from "@/app/lib/utils"
 import DraftModeToast from "@/app/components/DraftModeToast";
 import Footer from "@/app/components/Footer";
 import Header from "@/app/components/Header";
-import * as demo from "@/sanity/lib/demo";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
-import { settingsQuery } from "@/sanity/lib/queries";
-import { resolveOpenGraphImage } from "@/sanity/lib/utils";
+
 import { handleError } from "./client-utils";
 
 /**
@@ -64,7 +62,7 @@ export default  async function RootLayout({
             {/* The <SanityLive> component is responsible for making all sanityFetch calls in your application live, so should always be rendered. */}
             <SanityLive onError={handleError} />
             <Header />
-            <main className="container mx-auto px-4 py-8">
+            <main className="container mx-auto px-4">
               {children}
             </main>
             <Footer />

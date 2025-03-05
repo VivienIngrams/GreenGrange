@@ -9,19 +9,20 @@ export default function HeroSection() {
         <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white mb-8">
           The Green Grange
         </h1>
-        <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm px-6 py-3 rounded-full text-gray-900">
+        <div className="inline-flex items-center gap-2 backdrop-blur-sm bg-black/30 px-4 py-2 rounded-full text-white">
           <MapPin className="h-5 w-5" />
-          <p className="text-lg">4 Rue des Vannes, 10250 Gye sur Seine</p>
-        </div>
+          
+        
         <Link
           href="https://maps.app.goo.gl/m4UppiXeNXT41AmN8"
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-6 inline-flex items-center gap-2 text-white hover:text-white/90 transition-colors text-lg font-medium"
+          className=" inline-flex items-center gap-2  hover:text-white/90 transition-colors text-lg font-medium"
         >
-          View on Google Maps
+          4 Rue des Vannes, 10250 Gye sur Seine
           <ArrowRight className="w-5 h-5" />
         </Link>
+        </div>
       </div>
     </section>
   )
