@@ -2,7 +2,7 @@ import "./globals.css";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Jost } from "next/font/google";
 import { draftMode } from "next/headers";
 import { VisualEditing, toPlainText } from "next-sanity";
 import { Toaster } from "sonner";
@@ -12,21 +12,16 @@ import { cn } from "@/app/lib/utils"
 import DraftModeToast from "@/app/components/DraftModeToast";
 import Footer from "@/app/components/Footer";
 import Header from "@/app/components/Header";
-import { sanityFetch, SanityLive } from "@/sanity/lib/live";
+import { SanityLive } from "@/sanity/lib/live";
 
 import { handleError } from "./client-utils";
 
-/**
- * Generate metadata for the page.
- * Learn more: https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function
- */
 
-
-// const inter = Inter({
-//   variable: "--font-inter",
-//   subsets: ["latin"],
-//   display: "swap",
-// });
+const jost = Jost({
+  variable: "--font-jost",
+  subsets: ["latin"], 
+  weight: ["100", "200", "300", "400", "600", "700"],
+})
 
 export const metadata: Metadata = {
   title: "The Green Grange",
@@ -41,7 +36,7 @@ export default  async function RootLayout({
   const { isEnabled: isDraftMode } = await draftMode();
 
   return (
-    <html lang="en" suppressHydrationWarning className={cn( "min-h-screen bg-background antialiased")}>
+    <html lang="en" suppressHydrationWarning className={cn(jost.variable, "min-h-screen bg-background antialiased")}>
       <body>
         <ThemeProvider
           attribute="class"
@@ -61,8 +56,8 @@ export default  async function RootLayout({
             )}
             {/* The <SanityLive> component is responsible for making all sanityFetch calls in your application live, so should always be rendered. */}
             <SanityLive onError={handleError} />
+            <main className="container mx-auto px-4 font-jost bg-[#f0f9e6]">
             <Header />
-            <main className="container mx-auto px-4">
               {children}
             </main>
             <Footer />

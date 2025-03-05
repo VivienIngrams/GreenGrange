@@ -95,7 +95,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["var(--font-inter)"],
+        sans: ["var(--font-jost)", "sans-serif"],
       },
     },
   },
