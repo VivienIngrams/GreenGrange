@@ -1,17 +1,25 @@
+import Link from 'next/link';
+
 export default function Header() {
   return (
-    <header className="bg-primary text-primary-foreground">
+    <header className="">
       <div className="container mx-auto px-4">
        <nav>
-          <ul className="flex justify-between items-center py-4">
+          <ul className="flex justify-between items-center py-4 mx-[10vw]">
             <li>
-              <a href="/" className="text-lg font-bold">Next.js App</a>
+              <Link href="/" className="text-lg font-bold">The Green Grange</Link>
             </li>
             <li>
-              <a href="/activites" className="text-lg">Activities</a>
+              <Link href="/activities" className="text-lg">Activities</Link>
             </li>
             <li>
-              <a href="/house" className="text-lg">House</a>
+              <Link href="/house" className="text-lg">House</Link>
+            </li>
+            <li>
+              <Link href="/amenities" className="text-lg">Amenities</Link>
+            </li>
+            <li>
+              <Link href="/getting-around" className="text-lg">Getting Around Gyé</Link>
             </li>
           </ul>
        </nav>
