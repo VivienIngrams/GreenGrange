@@ -6,6 +6,7 @@ import Image from "next/image"
 
 // Define an interface matching your Sanity schema
 interface InfoSection {
+  title: string;
   identifier: string;
   pageContent: any[]; // This matches the array of blocks and images in your schema
   linkText: string;
@@ -47,8 +48,6 @@ async function getRenovationContent(): Promise<InfoSection | null> {
       identifier: "renovation" 
     });
     
-    console.log('Fetched renovation section:', section);
-
     return section || null;
   } catch (error) {
     console.error('Error fetching renovation content:', error);
@@ -61,7 +60,7 @@ export default async function RenovationPage() {
 
   if (!content) {
     return (
-      <div className="container mx-auto max-w-3xl px-6 py-12">
+      <div className="container mx-auto min-h-screen max-w-3xl px-6 py-12">
         <p className="text-center text-muted-foreground">Unable to load renovation content. Please try again later.</p>
       </div>
     )
@@ -69,8 +68,8 @@ export default async function RenovationPage() {
 
   return (
     <div className="container mx-auto max-w-3xl px-6 py-12">
-      <article className="prose prose-lg dark:prose-invert mx-auto">
-        <h1 className="text-4xl font-bold tracking-tighter mb-8">Our Renovation Story</h1>
+      <article className=" mx-auto">
+        <h1 className="text-4xl font-bold tracking-tighter mb-8">{content?.title}</h1>
         
         {content.pageContent ? (
           <PortableText

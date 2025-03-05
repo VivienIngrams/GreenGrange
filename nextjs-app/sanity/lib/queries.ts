@@ -32,6 +32,7 @@ export const getPhotosQuery = defineQuery(`
 
 export const getInfoSectionsQuery = defineQuery(`
   *[_type == "infoSection"] | order(order asc) {
+  title,
     identifier,
     homepageContent,
     linkText,
@@ -40,6 +41,7 @@ export const getInfoSectionsQuery = defineQuery(`
 
 export const getInfoSectionByIdQuery = defineQuery(`
   *[_type == "infoSection" && identifier == $identifier][0] {
+  title,
     identifier,
     homepageContent,
     pageContent,

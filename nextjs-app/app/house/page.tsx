@@ -8,6 +8,7 @@ import Image from "next/image";
 
 // Define an interface matching your Sanity schema
 interface InfoSection {
+  title: string;
   identifier: string;
   pageContent: any[]; // This matches the array of blocks and images in your schema
   linkText: string;
@@ -76,9 +77,9 @@ export default async function HousePage() {
   }
 
   return (
-    <div className="container mx-auto max-w-4xl px-6 py-12">
-      <article className="prose prose-lg dark:prose-invert mx-auto">
-        <h1 className="text-4xl font-bold tracking-tighter mb-8">The House</h1>
+    <div className="container mx-auto min-h-screen max-w-4xl px-6 py-12">
+      <article className=" mx-auto">
+        <h1 className="text-4xl font-bold tracking-tighter mb-8">{content.title}</h1>
 
         {content.pageContent ? (
           <PortableText

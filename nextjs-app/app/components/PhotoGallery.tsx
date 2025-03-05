@@ -1,5 +1,4 @@
 
-import Image from "next/image";
 import { getPhotosQuery } from "@/sanity/lib/queries";
 import { client } from "@/sanity/lib/client";
 import { PhotoGrid } from "./PhotoGrid";

@@ -65,6 +65,7 @@ export default function AvailabilityCalendar() {
             unavailable: { textDecoration: "line-through", color: "red" },
           }}
           className="mx-auto"
+          style={{ "--rdp-accent-color": "oklch(0.609 0.126 221.723)" } as React.CSSProperties}
         />
       </div>
       <p className="mt-4 text-sm text-muted-foreground text-center max-w-md">

@@ -1,30 +1,41 @@
 import Link from 'next/link';
+import { client } from '@/sanity/lib/client';
+import { getInfoSectionsQuery } from '@/sanity/lib/queries';
 
-export default function Header() {
-  return (
-    <header className=" text-green-800">
-      <div className="container mx-auto px-4">
-       <nav>
-          <ul className="flex justify-between items-center py-4 mx-[10vw]">
-            <li>
-              <Link href="/" className="text-lg font-bold">The Green Grange</Link>
-            </li>
-            <li>
-              <Link href="/house" className="text-lg">The House</Link>
-            </li>
-            <li>
-              <Link href="/getting-around" className="text-lg">Getting Around Gyé</Link>
-            </li>
-            <li>
-              <Link href="/activities" className="text-lg">Local Activities</Link>
-            </li>
-            <li>
-              <Link href="/renovation" className="text-lg">Our Renovation Story</Link>
-            </li>
-          </ul>
-       </nav>
-      </div>
-    </header>
-  )
+interface NavInfoSection {
+  title: string;
+  identifier: string;
 }
 
+async function getNavSections(): Promise<NavInfoSection[] | null> {
+  return client.fetch(getInfoSectionsQuery);
+}
+
+export default async function Header() {
+  const navSections = await getNavSections();
+
+  if (!navSections?.length) return null; // If there are no nav sections, return nothing
+
+  return (
+    <header className="text-green-800">
+      <div className="container mx-auto px-4">
+        <nav>
+          <ul className="flex justify-between items-center py-4 mx-[10vw]">
+          <li >
+                <Link href='/' className="text-lg">
+                 Welcome
+                </Link>
+              </li>
+            {navSections.map((section) => (
+              <li key={section.identifier}>
+                <Link href={`/${section.identifier}`} className="text-lg">
+                  {section.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </header>
+  );
+}

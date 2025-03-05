@@ -2,9 +2,16 @@ import { defineField, defineType } from 'sanity'
 
 export const infoSections = defineType({
     name: 'infoSection',
-    title: 'Info Section',
+    title: 'Section',
     type: 'document',
     fields: [
+      defineField({
+        name: 'title',
+        title: 'Title',
+        type: 'string',
+        description: 'Title of the section',
+        validation: (Rule: any) => Rule.required()
+      }),
       defineField({
         name: 'identifier',
         title: 'Identifier',

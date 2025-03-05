@@ -6,6 +6,7 @@ import { getInfoSectionsQuery } from "@/sanity/lib/queries";
 import { client } from "@/sanity/lib/client";
 
 interface HomePageInfoSectionData {
+  title: string;
   identifier: string;
   homepageContent: PortableTextBlock[];
   linkText: string;
@@ -31,7 +32,7 @@ export default async function HomePage() {
             index % 2 === 0 ? 'bg-background' : 'bg-muted'
           }`}
         >
-          <div className="container max-w-6xl px-6">
+          <div className="container max-w-3xl px-6">
             <HomePageSection data={section} />
           </div>
         </div>

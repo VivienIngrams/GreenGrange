@@ -7,6 +7,7 @@ import Image from "next/image"
 
 // Define an interface matching your Sanity schema
 interface InfoSection {
+  title: string;
   identifier: string;
   pageContent: any[]; // This matches the array of blocks and images in your schema
   linkText: string;
@@ -48,11 +49,9 @@ async function getGettingAroundContent(): Promise<InfoSection | null> {
       identifier: "getting-around" 
     });
     
-    console.log('Fetched getting around section:', section);
 
     return section || null;
   } catch (error) {
-    console.error('Error fetching getting around content:', error);
     return null;
   }
 }
@@ -61,9 +60,9 @@ export default async function GettingAroundPage() {
   const content = await getGettingAroundContent()
 
   return (
-    <div className="container mx-auto max-w-3xl px-6 py-12">
-      <article className="prose prose-lg dark:prose-invert mx-auto">
-        <h1 className="text-4xl font-bold tracking-tighter mb-8">Getting Around</h1>
+    <div className="container mx-auto min-h-screen max-w-3xl px-6 py-12">
+      <article className=" mx-auto">
+        <h1 className="text-4xl font-bold tracking-tighter mb-8">{content?.title}</h1>
         
         {content?.pageContent ? (
           <PortableText 
