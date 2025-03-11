@@ -6,7 +6,6 @@ import { urlForImage } from "@/sanity/lib/utils"
 import Image from "next/image"
 import { Typography } from "../components/Typography"
 
-
 interface InfoSection {
   title: string;
   identifier: string;
@@ -23,13 +22,13 @@ const portableTextComponents = {
       if (!imageUrl) return null;
 
       return (
-        <figure className="my-8">
+        <figure className="my-8 md:mr-44">
           <Image
             src={imageUrl}
             alt={value.alt ?? "Decorative image"}
-            className=" w-full object-contain"
-            width={400}
-            height={600}
+            className="w-full object-contain"
+            width={200}
+            height={200}
           />
           {value.caption && (
             <figcaption className="mt-2 text-center text-sm text-muted-foreground">
@@ -47,7 +46,13 @@ const portableTextComponents = {
     blockquote: ({ children }: { children?: React.ReactNode }) => <Typography.Blockquote>{children}</Typography.Blockquote>,
     normal: ({ children }: { children?: React.ReactNode }) => <Typography.Paragraph>{children}</Typography.Paragraph>,
   },
-};
+  marks: {
+    link: ({ children, value }: { children: React.ReactNode; value?: { href?: string } }) => {
+      if (!value?.href) return <>{children}</>;
+      return <Typography.Link href={value.href}>{children}</Typography.Link>;
+    },
+  },
+}
 
 export const metadata: Metadata = {
   title: "Activities | The Green Grange",
@@ -73,15 +78,19 @@ export default async function ActivitiesPage() {
   const content = await getActivitiesContent();
   
   return (
-    <div className="container mx-auto min-h-screen max-w-3xl px-6 py-12">
-      <h1 className="text-4xl font-bold tracking-tighter mb-8">{content?.title}</h1>
-      <div className="">
+    <div className="font-jost mx-auto min-h-screen max-w-3xl px-6 py-12">
+      <article className="mx-auto">
+        <Typography.H1>{content?.title}</Typography.H1>
+        
         {content?.pageContent ? (
-          <PortableText value={content.pageContent} />
+          <PortableText 
+            value={content.pageContent} 
+            components={portableTextComponents}
+          />
         ) : (
-          <p>No activities content available.</p>
+          <p>No content available for Activities.</p>
         )}
-      </div>
+      </article>
     </div>
   )
 }

@@ -5,7 +5,7 @@ export const Typography = {
       </h1>
     ),
     H2: ({ children }: { children: React.ReactNode }) => (
-      <h2 className="text-3xl font-semibold font-kalnia tracking-tight mb-6">
+      <h2 className="text-3xl font-medium text-black tracking-tight mb-6">
         {children}
       </h2>
     ),
@@ -21,6 +21,11 @@ export const Typography = {
       <blockquote className="border-l-4 border-gray-400 pl-4 italic text-lg text-gray-700">
         {children}
       </blockquote>
+    ),
+    Link: ({ children, href }: { children: React.ReactNode; href: string }) => (
+      <a href={href} className="underline text-blue-900 hover:text-blue-800">
+        {children}
+      </a>
     ),
   };
   

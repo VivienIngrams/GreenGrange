@@ -5,48 +5,50 @@ import PhotoGallery from "@/app/components/PhotoGallery";
 import AmenitiesList from "@/app/components/AmenitiesList";
 import { client } from "@/sanity/lib/client";
 import { getInfoSectionByIdQuery } from "@/sanity/lib/queries";
-import Image from "next/legacy/image";
-import { urlForImage } from "@/sanity/lib/utils";
+import { urlForImage } from "@/sanity/lib/utils"
+import Image from "next/image"
+import { Typography } from "../components/Typography"
 
-// Define an interface matching your Sanity schema
+
 interface InfoSection {
   title: string;
   identifier: string;
-  pageContent: any[]; // This matches the array of blocks and images in your schema
+  pageContent: any[]; 
   linkText: string;
 }
 
 const portableTextComponents = {
   types: {
-    image: ({
-      value,
-    }: {
-      value: { alt?: string; caption?: string; asset?: { _ref: string } };
-    }) => {
+    image: ({ value }: { value: { alt?: string, caption?: string, asset?: { _ref: string } } }) => {
       if (!value.asset) return null;
-
-      // Get image URL using Sanity's urlForImage utility
-      const imageUrl = urlForImage(value)?.url() || "";
       
+      const imageUrl = urlForImage(value)?.url();
+      if (!imageUrl) return null;
+
       return (
         <figure className="my-8">
-          <div className="relative w-full aspect-[4/3]">
-            <Image
-              src={imageUrl}
-              alt={value.alt ?? "Decorative image"}
-              layout="fill"
-              objectFit="contain"
-              className="rounded-lg"
-            />
-          </div>
+          <Image
+            src={imageUrl}
+            alt={value.alt ?? "Decorative image"}
+            className=" w-full object-contain"
+            width={400}
+            height={600}
+          />
           {value.caption && (
             <figcaption className="mt-2 text-center text-sm text-muted-foreground">
               {value.caption}
             </figcaption>
           )}
         </figure>
-      );
+      )
     },
+  },
+  block: {
+    h1: ({ children }: { children?: React.ReactNode }) => <Typography.H1>{children}</Typography.H1>,
+    h2: ({ children }: { children?: React.ReactNode }) => <Typography.H2>{children}</Typography.H2>,
+    h3: ({ children }: { children?: React.ReactNode }) => <Typography.H3>{children}</Typography.H3>,
+    blockquote: ({ children }: { children?: React.ReactNode }) => <Typography.Blockquote>{children}</Typography.Blockquote>,
+    normal: ({ children }: { children?: React.ReactNode }) => <Typography.Paragraph>{children}</Typography.Paragraph>,
   },
 };
 
@@ -84,7 +86,7 @@ export default async function HousePage() {
   return (
     <div className="font-jost mx-auto min-h-screen max-w-4xl px-6 py-12">
       <article className="mx-auto">
-        <h1 className="text-4xl font-bold font-kalnia tracking-tighter mb-8">{content.title}</h1>
+        <h1 className="text-4xl font-semibold font-kalnia tracking-tighter mb-8">{content.title}</h1>
 
         {content.pageContent ? (
           <PortableText
