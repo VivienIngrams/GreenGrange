@@ -33,7 +33,7 @@ export default async function HomePage() {
       {infoSections.map((section: HomePageInfoSectionData, index: number) => (
         <div
           key={section.identifier}
-          className={`md:min-h-[90vh] flex items-center justify-center ${
+          className={`md:min-h-[80vh] flex items-center justify-center ${
             index % 2 === 0 ? 'bg-background' : 'bg-muted'
           }`}
         >

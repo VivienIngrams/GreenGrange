@@ -60,16 +60,16 @@ export default async function RenovationPage() {
 
   if (!content) {
     return (
-      <div className="container mx-auto min-h-screen max-w-3xl px-6 py-12">
+      <div className=" mx-auto min-h-screen max-w-3xl px-6 py-12">
         <p className="text-center text-muted-foreground">Unable to load renovation content. Please try again later.</p>
       </div>
     )
   }
 
   return (
-    <div className="container mx-auto max-w-3xl px-6 py-12">
+    <div className=" mx-auto font-jost max-w-3xl px-6 py-12">
       <article className=" mx-auto">
-        <h1 className="text-4xl font-bold tracking-tighter mb-8">{content?.title}</h1>
+        <h1 className="text-4xl  font-kalnia font-bold tracking-tighter mb-8">{content?.title}</h1>
         
         {content.pageContent ? (
           <PortableText

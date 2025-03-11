@@ -1,9 +1,10 @@
 import { PortableText } from "@portabletext/react"
+import { Typography } from "../components/Typography"
 import { Metadata } from "next"
 import { client } from "@/sanity/lib/client"
 import { getInfoSectionByIdQuery } from "@/sanity/lib/queries"
 import Image from "next/legacy/image"
-
+import { urlForImage } from "@/sanity/lib/utils"
 
 // Define an interface matching your Sanity schema
 interface InfoSection {
@@ -17,14 +18,17 @@ const portableTextComponents = {
   types: {
     image: ({ value }: { value: { alt?: string, caption?: string, asset?: { _ref: string } } }) => {
       if (!value.asset) return null;
+      
+      const imageUrl = urlForImage(value)?.url();
+      if (!imageUrl) return null;
 
       return (
         <figure className="my-8">
           <Image
-            src={value.asset ? value.asset._ref : "/placeholder.png"} 
-            alt={value.alt ?? 'Decorative image'}
-            className="rounded-lg w-full object-cover"
-            width={800}
+            src={imageUrl}
+            alt={value.alt ?? "Decorative image"}
+            className=" w-full object-contain"
+            width={400}
             height={600}
           />
           {value.caption && (
@@ -36,7 +40,15 @@ const portableTextComponents = {
       )
     },
   },
-}
+  block: {
+    h1: ({ children }: { children?: React.ReactNode }) => <Typography.H1>{children}</Typography.H1>,
+    h2: ({ children }: { children?: React.ReactNode }) => <Typography.H2>{children}</Typography.H2>,
+    h3: ({ children }: { children?: React.ReactNode }) => <Typography.H3>{children}</Typography.H3>,
+    blockquote: ({ children }: { children?: React.ReactNode }) => <Typography.Blockquote>{children}</Typography.Blockquote>,
+    normal: ({ children }: { children?: React.ReactNode }) => <Typography.Paragraph>{children}</Typography.Paragraph>,
+  },
+};
+
 
 export const metadata: Metadata = {
   title: "Getting Around | The Green Grange",
@@ -60,9 +72,9 @@ export default async function GettingAroundPage() {
   const content = await getGettingAroundContent()
 
   return (
-    <div className="container mx-auto min-h-screen max-w-3xl px-6 py-12">
+    <div className="font-jost mx-auto min-h-screen max-w-3xl px-6 py-12 md:py-24">
       <article className=" mx-auto">
-        <h1 className="text-4xl font-bold tracking-tighter mb-8">{content?.title}</h1>
+        <h1 className="text-4xl font-semibold font-kalnia tracking-tighter mb-8">{content?.title}</h1>
         
         {content?.pageContent ? (
           <PortableText 

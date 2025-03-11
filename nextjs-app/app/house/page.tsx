@@ -73,7 +73,7 @@ export default async function HousePage() {
 
   if (!content) {
     return (
-      <div className="container mx-auto max-w-4xl px-6 py-12">
+      <div className=" mx-auto max-w-4xl px-6 py-12">
         <p className="text-center text-muted-foreground">
           Unable to load house content. Please try again later.
         </p>
@@ -82,9 +82,9 @@ export default async function HousePage() {
   }
 
   return (
-    <div className="container mx-auto min-h-screen max-w-4xl px-6 py-12">
+    <div className="font-jost mx-auto min-h-screen max-w-4xl px-6 py-12">
       <article className="mx-auto">
-        <h1 className="text-4xl font-bold tracking-tighter mb-8">{content.title}</h1>
+        <h1 className="text-4xl font-bold font-kalnia tracking-tighter mb-8">{content.title}</h1>
 
         {content.pageContent ? (
           <PortableText

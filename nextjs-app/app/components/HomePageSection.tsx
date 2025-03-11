@@ -25,24 +25,24 @@ export default function HomePageSection({ data, index }: HomePageSectionProps) {
   const imageOnLeft = index % 2 === 1;
   
   return (
-    <div className="py-16 md:px-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    <div className="py-8 md:px-8">
+      <Link
+            href={`/${data.identifier}`} className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         
        
 
         {/* Content Section */}
         <div className="w-full text-green-800">
-          <h2 className="text-2xl md:text-4xl font-bold mb-6">{data.title}</h2>
-          <div className=" text-green-900 mb-8">
+          <h2 className="text-2xl md:text-4xl font-kalnia font-semibold mb-4">{data.title}</h2>
+          <div className=" text-green-900 mb-4">
             <PortableText value={data.homepageContent} />
           </div>
-          <Link
-            href={`/${data.identifier}`}
-            className="group inline-flex items-center gap-2 text-primary text-lg font-normal hover:text-primary/80 transition-colors"
+          <div
+            className="group inline-flex items-center gap-2 text-lg font-semibold hover:text-green-700 transition-colors"
           >
             {data.linkText}
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-          </Link>
+          </div>
         </div>
 
          {/* Image Section */}
@@ -56,13 +56,13 @@ export default function HomePageSection({ data, index }: HomePageSectionProps) {
                   layout="fill"
                   objectFit="cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="rounded-sm"
+                  className="rounded-md"
                 />
               </div>
             </div>
           )}
         </div>
-      </div>
+      </Link>
     </div>
   );
 }
