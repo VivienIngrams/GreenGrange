@@ -96,6 +96,7 @@ export default {
       },
       fontFamily: {
         sans: ["var(--font-jost)", "sans-serif"],
+        serif: ["var(--font-kalnia)", "serif"],
       },
     },
   },

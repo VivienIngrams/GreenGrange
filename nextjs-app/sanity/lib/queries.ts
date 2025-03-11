@@ -30,22 +30,31 @@ export const getPhotosQuery = defineQuery(`
   }
 `)
 
+
 export const getInfoSectionsQuery = defineQuery(`
   *[_type == "infoSection"] | order(order asc) {
-  title,
+    title,
     identifier,
     homepageContent,
     linkText,
+    "image": {
+      "src": image.asset->url,
+      "alt": image.alt
+    }
   }
 `)
 
 export const getInfoSectionByIdQuery = defineQuery(`
   *[_type == "infoSection" && identifier == $identifier][0] {
-  title,
+    title,
     identifier,
     homepageContent,
     pageContent,
     linkText,
+    "image": {
+      "src": image.asset->url,
+      "alt": image.alt
+    }
   }
 `)
 

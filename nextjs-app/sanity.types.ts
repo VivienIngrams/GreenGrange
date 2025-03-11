@@ -522,10 +522,10 @@ export type GetAmenitiesQueryResult = null;
 // Query: *[_type == "photos"][0] {    "images": images[].asset->url  }
 export type GetPhotosQueryResult = null;
 // Variable: getInfoSectionsQuery
-// Query: *[_type == "infoSection"] | order(order asc) {    identifier,    homepageContent,    linkText,  }
+// Query: *[_type == "infoSection"] | order(order asc) {  title,    identifier,    homepageContent,    linkText,  }
 export type GetInfoSectionsQueryResult = Array<never>;
 // Variable: getInfoSectionByIdQuery
-// Query: *[_type == "infoSection" && identifier == $identifier][0] {    identifier,    homepageContent,    pageContent,    linkText,  }
+// Query: *[_type == "infoSection" && identifier == $identifier][0] {  title,    identifier,    homepageContent,    pageContent,    linkText,  }
 export type GetInfoSectionByIdQueryResult = null;
 // Variable: getAvailabilityQuery
 // Query: *[_type == "availability"][0] {    title,    description,    unavailablePeriods[] {      from,      to,      note    }  }
@@ -539,8 +539,8 @@ declare module "@sanity/client" {
     "\n  *[_type == \"page\" || _type == \"post\" && defined(slug.current)] | order(_type asc) {\n    \"slug\": slug.current,\n    _type,\n    _updatedAt,\n  }\n": SitemapDataResult;
     "\n  *[_type == \"amenities\"][0] {\n    title,\n    description,\n    items[] {\n      name,\n      icon\n    }\n  }\n": GetAmenitiesQueryResult;
     "\n  *[_type == \"photos\"][0] {\n    \"images\": images[].asset->url\n  }\n": GetPhotosQueryResult;
-    "\n  *[_type == \"infoSection\"] | order(order asc) {\n    identifier,\n    homepageContent,\n    linkText,\n  }\n": GetInfoSectionsQueryResult;
-    "\n  *[_type == \"infoSection\" && identifier == $identifier][0] {\n    identifier,\n    homepageContent,\n    pageContent,\n    linkText,\n  }\n": GetInfoSectionByIdQueryResult;
+    "\n  *[_type == \"infoSection\"] | order(order asc) {\n  title,\n    identifier,\n    homepageContent,\n    linkText,\n  }\n": GetInfoSectionsQueryResult;
+    "\n  *[_type == \"infoSection\" && identifier == $identifier][0] {\n  title,\n    identifier,\n    homepageContent,\n    pageContent,\n    linkText,\n  }\n": GetInfoSectionByIdQueryResult;
     "\n  *[_type == \"availability\"][0] {\n    title,\n    description,\n    unavailablePeriods[] {\n      from,\n      to,\n      note\n    }\n  }\n": GetAvailabilityQueryResult;
   }
 }

@@ -2,9 +2,9 @@ import "./globals.css";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
-import { Jost } from "next/font/google";
+import { Jost, Kalnia } from "next/font/google";
 import { draftMode } from "next/headers";
-import { VisualEditing, toPlainText } from "next-sanity";
+import { VisualEditing } from "next-sanity";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/app/components/theme-provider";
 import { cn } from "@/app/lib/utils"
@@ -23,6 +23,12 @@ const jost = Jost({
   weight: ["100", "200", "300", "400", "600", "700"],
 })
 
+const kalnia= Kalnia({
+  variable: "--font-kalnia",
+  subsets: ["latin"], 
+  weight: ["100", "200", "300", "400", "600", "700"],
+})
+
 export const metadata: Metadata = {
   title: "The Green Grange",
   description: "The Green Grange is a beautifully restored 18th-century eco-friendly barn in Gyé-sur-Seine, Champagne. A cozy retreat with local charm and nature at your doorstep.",
@@ -36,7 +42,7 @@ export default  async function RootLayout({
   const { isEnabled: isDraftMode } = await draftMode();
 
   return (
-    <html lang="en" suppressHydrationWarning className={cn(jost.variable, "min-h-screen bg-background antialiased")}>
+    <html lang="en" suppressHydrationWarning className={cn(jost.variable, kalnia.variable, "min-h-screen bg-background antialiased")}>
       <body>
         <ThemeProvider
           attribute="class"
@@ -56,7 +62,7 @@ export default  async function RootLayout({
             )}
             {/* The <SanityLive> component is responsible for making all sanityFetch calls in your application live, so should always be rendered. */}
             <SanityLive onError={handleError} />
-            <main className="container mx-auto px-4 font-jost text-green-800 bg-[#f0f9e6]">
+            <main className="container mx-auto px-4  mt-12 font-jost text-green-900 ">
             <Header />
               {children}
             <Footer />

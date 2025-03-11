@@ -54,7 +54,6 @@ async function getHouseContent(): Promise<InfoSection | null> {
       identifier: "house",
     });
 
-    console.log("Fetched house section:", section);
 
     return section || null;
   } catch (error) {

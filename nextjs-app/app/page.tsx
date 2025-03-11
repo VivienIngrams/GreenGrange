@@ -1,3 +1,4 @@
+// HomePage.tsx
 import AvailabilityCalendar from "@/app/components/AvailabilityCalendar";
 import HeroSection from "@/app/components/HeroSection";
 import HomePageSection from "@/app/components/HomePageSection";
@@ -10,6 +11,10 @@ interface HomePageInfoSectionData {
   identifier: string;
   homepageContent: PortableTextBlock[];
   linkText: string;
+  image: {
+    src: string;
+    alt: string;
+  };
 }
 
 async function getInfoSections(): Promise<HomePageInfoSectionData[]> {
@@ -20,24 +25,24 @@ async function getInfoSections(): Promise<HomePageInfoSectionData[]> {
 
 export default async function HomePage() {
   const infoSections = await getInfoSections();
-
+  
   return (
     <main className="min-h-screen">
       <HeroSection />
       
       {infoSections.map((section: HomePageInfoSectionData, index: number) => (
-        <div 
+        <div
           key={section.identifier}
           className={`min-h-screen flex items-center justify-center ${
             index % 2 === 0 ? 'bg-background' : 'bg-muted'
           }`}
         >
-          <div className="container max-w-3xl px-6">
-            <HomePageSection data={section} />
+          <div className="container max-w-5xl px-6">
+            <HomePageSection data={section} index={index} />
           </div>
         </div>
       ))}
-
+      
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="container max-w-6xl px-6">
           <AvailabilityCalendar />
