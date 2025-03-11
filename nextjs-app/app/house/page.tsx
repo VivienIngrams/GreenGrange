@@ -1,10 +1,12 @@
+// app/house/page.tsx
 import { PortableText } from "@portabletext/react";
 import { Metadata } from "next";
 import PhotoGallery from "@/app/components/PhotoGallery";
 import AmenitiesList from "@/app/components/AmenitiesList";
 import { client } from "@/sanity/lib/client";
 import { getInfoSectionByIdQuery } from "@/sanity/lib/queries";
-import Image from "next/image";
+import Image from "next/legacy/image";
+import { urlForImage } from "@/sanity/lib/utils";
 
 // Define an interface matching your Sanity schema
 interface InfoSection {
@@ -23,15 +25,20 @@ const portableTextComponents = {
     }) => {
       if (!value.asset) return null;
 
+      // Get image URL using Sanity's urlForImage utility
+      const imageUrl = urlForImage(value)?.url() || "";
+      
       return (
         <figure className="my-8">
-          <Image
-            src={value.asset ? value.asset._ref : "/placeholder.png"}
-            alt={value.alt ?? "Decorative image"}
-            className="rounded-lg w-full object-cover"
-            width={800}
-            height={600}
-          />
+          <div className="relative w-full aspect-[4/3]">
+            <Image
+              src={imageUrl}
+              alt={value.alt ?? "Decorative image"}
+              layout="fill"
+              objectFit="contain"
+              className="rounded-lg"
+            />
+          </div>
           {value.caption && (
             <figcaption className="mt-2 text-center text-sm text-muted-foreground">
               {value.caption}
@@ -53,7 +60,6 @@ async function getHouseContent(): Promise<InfoSection | null> {
     const section = await client.fetch(getInfoSectionByIdQuery, {
       identifier: "house",
     });
-
 
     return section || null;
   } catch (error) {
@@ -77,7 +83,7 @@ export default async function HousePage() {
 
   return (
     <div className="container mx-auto min-h-screen max-w-4xl px-6 py-12">
-      <article className=" mx-auto">
+      <article className="mx-auto">
         <h1 className="text-4xl font-bold tracking-tighter mb-8">{content.title}</h1>
 
         {content.pageContent ? (

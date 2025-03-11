@@ -2,7 +2,7 @@ import { PortableText } from "@portabletext/react"
 import { Metadata } from "next"
 import { client } from "@/sanity/lib/client"
 import { getInfoSectionByIdQuery } from "@/sanity/lib/queries"
-import Image from "next/image"
+import Image from "next/legacy/image"
 
 
 // Define an interface matching your Sanity schema

@@ -33,11 +33,11 @@ export default async function HomePage() {
       {infoSections.map((section: HomePageInfoSectionData, index: number) => (
         <div
           key={section.identifier}
-          className={`min-h-screen flex items-center justify-center ${
+          className={`md:min-h-[90vh] flex items-center justify-center ${
             index % 2 === 0 ? 'bg-background' : 'bg-muted'
           }`}
         >
-          <div className="container max-w-5xl px-6">
+          <div className="container max-w-5xl">
             <HomePageSection data={section} index={index} />
           </div>
         </div>
