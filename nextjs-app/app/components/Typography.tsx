@@ -23,7 +23,7 @@ export const Typography = {
       </blockquote>
     ),
     Link: ({ children, href }: { children: React.ReactNode; href: string }) => (
-      <a href={href} className="underline text-blue-900 hover:text-blue-800">
+      <a href={href} className="underline text-xs text-blue-900 hover:text-blue-800">
         {children}
       </a>
     ),

@@ -37,14 +37,14 @@ export default async function HomePage() {
             index % 2 === 0 ? 'bg-background' : 'bg-muted'
           }`}
         >
-          <div className="container max-w-5xl">
+          <div className=" max-w-5xl">
             <HomePageSection data={section} index={index} />
           </div>
         </div>
       ))}
       
       <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="container max-w-6xl px-6">
+        <div className=" max-w-6xl px-6">
           <AvailabilityCalendar />
         </div>
       </div>

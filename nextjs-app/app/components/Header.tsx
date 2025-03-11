@@ -17,8 +17,8 @@ export default async function Header() {
   if (!navSections?.length) return null; // If there are no nav sections, return nothing
 
   return (
-    <header className="text-green-800 fixed z-20 top-0 left-0 w-full bg-white ">
-      <div className="container mx-auto px-4">
+    <header className="text-green-800 hidden md:fixed z-20 top-0 left-0 w-full bg-white ">
+      <div className=" mx-auto px-4">
         <nav>
           <ul className="flex justify-between items-center py-4 mx-[10vw]">
           <li >
