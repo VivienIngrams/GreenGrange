@@ -1,15 +1,15 @@
-import { PortableText } from "@portabletext/react"
-import { Metadata } from "next"
-import { client } from "@/sanity/lib/client"
-import { getInfoSectionByIdQuery } from "@/sanity/lib/queries"
-import { urlForImage } from "@/sanity/lib/utils"
-import Image from "next/image"
-import { Typography } from "../components/Typography"
+import { PortableText } from "@portabletext/react";
+import { Metadata } from "next";
+import { client } from "@/sanity/lib/client";
+import { getInfoSectionByIdQuery } from "@/sanity/lib/queries";
+import { urlForImage } from "@/sanity/lib/utils";
+import Image from "next/image";
+import { Typography } from "../components/Typography";
 
 interface InfoSection {
   title: string;
   identifier: string;
-  pageContent: any[]; 
+  pageContent: any[];
   linkText: string;
 }
 
@@ -17,18 +17,19 @@ const portableTextComponents = {
   types: {
     image: ({ value }: { value: { alt?: string, caption?: string, asset?: { _ref: string } } }) => {
       if (!value.asset) return null;
-      
+
       const imageUrl = urlForImage(value)?.url();
       if (!imageUrl) return null;
 
       return (
-        <figure className="my-8 h-1/2 w-1/2 ">
+        <figure className="my-2 relative aspect-square w-1/2 overflow-hidden ">
           <Image
             src={imageUrl}
             alt={value.alt ?? "Decorative image"}
-            className="w-full object-contain"
-            width={200}
-            height={200}
+            className=" w-full object-contain aspect-square"
+            layout="fill"
+            objectFit="cover"
+            sizes="(max-width: 768px) 100vw, 20vw"
           />
           {value.caption && (
             <figcaption className="mt-2 text-center text-sm text-muted-foreground">
@@ -36,7 +37,7 @@ const portableTextComponents = {
             </figcaption>
           )}
         </figure>
-      )
+      );
     },
   },
   block: {
@@ -52,45 +53,47 @@ const portableTextComponents = {
       return <Typography.Link href={value.href}>{children}</Typography.Link>;
     },
   },
-}
+};
 
 export const metadata: Metadata = {
-  title: "Activities | The Green Grange",
-  description: "Activities and things to do around The Green Grange"
-}
+  title: "Dynamic Page | The Green Grange",
+  description: "Dynamic content page for The Green Grange",
+};
 
-async function getActivitiesContent(): Promise<InfoSection | null> {
+async function getContentBySlug(slug: string): Promise<InfoSection | null> {
   try {
-    // Fetch the specific info section for activities
-    const section = await client.fetch(getInfoSectionByIdQuery, { 
-      identifier: "activities" 
-    });
-    
-
+    const section = await client.fetch(getInfoSectionByIdQuery, { identifier: slug });
     return section || null;
   } catch (error) {
-  
+    console.error("Error fetching content:", error);
     return null;
   }
 }
 
-export default async function ActivitiesPage() {
-  const content = await getActivitiesContent();
-  
+export default async function DynamicPage({ params }: { params: { slug: string } }) {
+  const { slug } = params;
+  const content = await getContentBySlug(slug);
+
+  if (!content) {
+    return (
+      <div className="mx-auto min-h-screen max-w-3xl px-6 py-12">
+        <p className="text-center text-muted-foreground">
+          Unable to load content. Please try again later.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="font-jost mx-auto min-h-screen max-w-3xl px-6 py-12">
       <article className="mx-auto">
-        <Typography.H1>{content?.title}</Typography.H1>
-        
-        {content?.pageContent ? (
-          <PortableText 
-            value={content.pageContent} 
-            components={portableTextComponents}
-          />
+        <Typography.H1>{content.title}</Typography.H1>
+        {content.pageContent ? (
+          <PortableText value={content.pageContent} components={portableTextComponents} />
         ) : (
-          <p>No content available for Activities.</p>
+          <p>No content available.</p>
         )}
       </article>
     </div>
-  )
+  );
 }

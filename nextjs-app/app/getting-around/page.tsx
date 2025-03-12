@@ -23,13 +23,14 @@ const portableTextComponents = {
       if (!imageUrl) return null;
 
       return (
-        <figure className="my-2 h-1/2 w-1/2">
+        <figure className="my-2 relative aspect-square w-1/2 overflow-hidden ">
           <Image
             src={imageUrl}
             alt={value.alt ?? "Decorative image"}
-            className=" w-full object-contain"
-            width={400}
-            height={600}
+            className=" w-full object-contain aspect-square"
+            layout="fill"
+                  objectFit="cover"
+                  sizes="(max-width: 768px) 100vw, 20vw"
           />
           {value.caption && (
             <figcaption className="mt-2 text-center text-sm text-muted-foreground">
