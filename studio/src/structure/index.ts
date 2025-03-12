@@ -1,4 +1,4 @@
-import {CogIcon} from '@sanity/icons'
+
 import type {StructureBuilder, StructureResolver} from 'sanity/structure'
 import pluralize from 'pluralize-esm'
 

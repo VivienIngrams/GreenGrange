@@ -23,7 +23,7 @@ const portableTextComponents = {
       if (!imageUrl) return null;
 
       return (
-        <figure className="my-8">
+        <figure className="my-2 h-1/2 w-1/2">
           <Image
             src={imageUrl}
             alt={value.alt ?? "Decorative image"}
@@ -74,7 +74,7 @@ export default async function GettingAroundPage() {
   return (
     <div className="font-jost mx-auto min-h-screen max-w-3xl px-6 py-12 md:py-24">
       <article className=" mx-auto">
-        <h1 className="text-4xl font-semibold font-kalnia tracking-tighter mb-8">{content?.title}</h1>
+        <h1 className="text-4xl font-semibold font-kalnia tracking-tighter mb-4">{content?.title}</h1>
         
         {content?.pageContent ? (
           <PortableText 

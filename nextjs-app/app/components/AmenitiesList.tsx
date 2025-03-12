@@ -33,7 +33,7 @@ export default async function AmenitiesList() {
 
   return (
     <section className="my-8">
-      <h2 className="text-2xl font-semibold mb-4">{amenities.title}</h2>
+      <h3 className="text-2xl font-semibold font-kalnia tracking-tight mt-8 mb-4">{amenities.title}</h3>
       {amenities.description && (
         <p className="text-muted-foreground mb-4">{amenities.description}</p>
       )}
@@ -41,9 +41,9 @@ export default async function AmenitiesList() {
         {amenities.items.map((amenity, index) => {
           const Icon = iconMap[amenity.icon as keyof typeof iconMap] || Check
           return (
-            <li key={index} className="flex items-center">
+            <li key={index} className="flex items-center ">
               <Icon className="mr-2 h-5 w-5 text-primary" />
-              <span>{amenity.name}</span>
+              <span className=" text-orange-950">{amenity.name}</span>
             </li>
           )
         })}

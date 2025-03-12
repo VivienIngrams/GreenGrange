@@ -22,7 +22,7 @@ const portableTextComponents = {
       if (!imageUrl) return null;
 
       return (
-        <figure className="my-8 md:mr-44">
+        <figure className="my-8 h-1/2 w-1/2 ">
           <Image
             src={imageUrl}
             alt={value.alt ?? "Decorative image"}

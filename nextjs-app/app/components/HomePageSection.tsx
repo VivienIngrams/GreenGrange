@@ -34,7 +34,7 @@ export default function HomePageSection({ data, index }: HomePageSectionProps) {
         {/* Content Section */}
         <div className="w-full text-green-800">
           <h2 className="text-2xl md:text-4xl font-kalnia font-semibold mb-4">{data.title}</h2>
-          <div className=" text-green-900 mb-4">
+          <div className="text-gray-800  mb-4">
             <PortableText value={data.homepageContent} />
           </div>
           <div
