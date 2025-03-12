@@ -140,7 +140,7 @@ export default async function DynamicPage({
 
   return (
     <div className="font-jost mx-auto min-h-screen max-w-3xl py-2">
-      <article className="mx-auto -mt-12">
+      <article className="mx-auto -mt-12 md:mt-4">
         <Typography.H1>{content.title}</Typography.H1>
         {content.pageContent ? (
           <PortableText

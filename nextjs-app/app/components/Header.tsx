@@ -64,13 +64,18 @@ export default function Header() {
               </svg>
             </button>
           </div>
-          <ul className={`md:flex w-full justify-around text-md md:text-lg ${isOpen ? 'block' : 'hidden'}`}>
-          <div className="flex items-center">
+          <div className="flex items-center md:hidden">
             <Link href="/" className=" mb-1 text-green-800">
               Welcome to the <span className='font-kalnia font-semibold'>Green Grange</span> 
             </Link>
           </div>
-            {navSections.map((section) => (
+          <ul className={`md:flex w-full justify-around text-md md:text-lg ${isOpen ? 'block' : 'hidden'}`}>
+          <div className="hidden md:flex items-center">
+            <Link href="/" className=" mb-1 text-green-800">
+              Welcome to the <span className='font-kalnia font-semibold'>Green Grange</span> 
+            </Link>
+          </div>
+           {navSections.map((section) => (
               <li key={section.identifier} className="md:ml-4 ">
                 <Link href={`/${section.identifier}`} className=" text-center block py-2 md:py-0">
                   {section.title}
