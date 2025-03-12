@@ -32,7 +32,7 @@ export default function Header() {
   return (
     <header className="text-yellow-900 fixed z-20 top-0 left-0 w-full bg-white">
       <div className="mx-auto px-4">
-        <nav className="flex flex-col justify-between items-center py-4">
+        <nav className="flex flex-col  items-center w-full py-4">
          
           <div className="md:hidden">
             <button
@@ -64,15 +64,15 @@ export default function Header() {
               </svg>
             </button>
           </div>
+          <ul className={`md:flex w-full justify-around text-md md:text-lg ${isOpen ? 'block' : 'hidden'}`}>
           <div className="flex items-center">
-            <Link href="/" className="text-md mb-1 text-green-800">
+            <Link href="/" className=" mb-1 text-green-800">
               Welcome to the <span className='font-kalnia font-semibold'>Green Grange</span> 
             </Link>
           </div>
-          <ul className={`md:flex md:items-center ${isOpen ? 'block' : 'hidden'}`}>
             {navSections.map((section) => (
-              <li key={section.identifier} className="md:ml-4">
-                <Link href={`/${section.identifier}`} className="text-md text-center block py-2 md:py-0">
+              <li key={section.identifier} className="md:ml-4 ">
+                <Link href={`/${section.identifier}`} className=" text-center block py-2 md:py-0">
                   {section.title}
                 </Link>
               </li>

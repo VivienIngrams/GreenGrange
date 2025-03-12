@@ -63,6 +63,14 @@ export const getNextInfoSectionQuery = defineQuery(`
   }
 `);
 
+export const getFirstInfoSectionQuery = defineQuery(`
+  *[_type == "infoSection"] | order(order asc) [0] {
+    title,
+    identifier,
+    linkText
+  }
+`);
+
 export const getAvailabilityQuery = defineQuery(`
   *[_type == "availability"][0] {
     title,
