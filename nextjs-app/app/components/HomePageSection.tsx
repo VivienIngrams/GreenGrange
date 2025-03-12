@@ -56,7 +56,7 @@ export default function HomePageSection({ data, index }: HomePageSectionProps) {
                   layout="fill"
                   objectFit="cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="rounded-md"
+                  className="rounded-sm"
                 />
               </div>
             </div>

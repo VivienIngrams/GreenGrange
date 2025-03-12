@@ -5,6 +5,8 @@ import { getInfoSectionByIdQuery } from "@/sanity/lib/queries";
 import { urlForImage } from "@/sanity/lib/utils";
 import Image from "next/image";
 import { Typography } from "../components/Typography";
+import PhotoGallery from "@/app/components/PhotoGallery";
+import AmenitiesList from "@/app/components/AmenitiesList";
 
 interface InfoSection {
   title: string;
@@ -22,14 +24,14 @@ const portableTextComponents = {
       if (!imageUrl) return null;
 
       return (
-        <figure className="my-2 relative aspect-square w-1/2 overflow-hidden ">
+        <figure className="my-2 relative aspect-square md:w-1/2 overflow-hidden ">
           <Image
             src={imageUrl}
             alt={value.alt ?? "Decorative image"}
             className=" w-full object-contain aspect-square"
             layout="fill"
             objectFit="cover"
-            sizes="(max-width: 768px) 100vw, 20vw"
+            sizes="(max-width: 768px) 90vw, 20vw"
           />
           {value.caption && (
             <figcaption className="mt-2 text-center text-sm text-muted-foreground">
@@ -85,7 +87,7 @@ export default async function DynamicPage({ params }: { params: { slug: string }
   }
 
   return (
-    <div className="font-jost mx-auto min-h-screen max-w-3xl px-6 py-12">
+    <div className="font-jost mx-auto min-h-screen max-w-3xl py-2">
       <article className="mx-auto">
         <Typography.H1>{content.title}</Typography.H1>
         {content.pageContent ? (
@@ -94,6 +96,16 @@ export default async function DynamicPage({ params }: { params: { slug: string }
           <p>No content available.</p>
         )}
       </article>
+      {(slug === 'renovation' || slug === 'house') && (
+        <div className="mt-16">
+          <PhotoGallery />
+        </div>
+      )}
+      {slug === 'house' && (
+        <div className="mt-16">
+          <AmenitiesList />
+        </div>
+      )}
     </div>
   );
 }

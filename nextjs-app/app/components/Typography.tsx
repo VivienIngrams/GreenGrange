@@ -15,7 +15,7 @@ export const Typography = {
       </h3>
     ),
     Paragraph: ({ children }: { children: React.ReactNode }) => (
-      <p className="text-lg leading-relaxed text-yellow-950">{children}</p>
+      <p className="text-md md:text-lg text-yellow-950">{children}</p>
     ),
     Blockquote: ({ children }: { children: React.ReactNode }) => (
       <blockquote className="border-l-4 border-gray-400 pl-4 italic text-lg text-gray-700">

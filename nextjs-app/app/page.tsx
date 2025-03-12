@@ -27,7 +27,7 @@ export default async function HomePage() {
   const infoSections = await getInfoSections();
   
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen ">
       <HeroSection />
       
       {infoSections.map((section: HomePageInfoSectionData, index: number) => (
