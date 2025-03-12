@@ -1,18 +1,20 @@
 import { PortableText } from "@portabletext/react";
 import { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
-import { getInfoSectionByIdQuery } from "@/sanity/lib/queries";
+import { getInfoSectionByIdQuery, getNextInfoSectionQuery } from "@/sanity/lib/queries";
 import { urlForImage } from "@/sanity/lib/utils";
 import Image from "next/image";
 import { Typography } from "../components/Typography";
 import PhotoGallery from "@/app/components/PhotoGallery";
 import AmenitiesList from "@/app/components/AmenitiesList";
+import Link from "next/link";
 
 interface InfoSection {
   title: string;
   identifier: string;
   pageContent: any[];
   linkText: string;
+  order: number;
 }
 
 const portableTextComponents = {
@@ -72,6 +74,16 @@ async function getContentBySlug(slug: string): Promise<InfoSection | null> {
   }
 }
 
+async function getNextInfoSection(order: number): Promise<InfoSection | null> {
+  try {
+    const nextSection = await client.fetch(getNextInfoSectionQuery, { order });
+    return nextSection || null;
+  } catch (error) {
+    console.error("Error fetching next section:", error);
+    return null;
+  }
+}
+
 export default async function DynamicPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
   const content = await getContentBySlug(slug);
@@ -85,6 +97,8 @@ export default async function DynamicPage({ params }: { params: { slug: string }
       </div>
     );
   }
+
+  const nextSection = await getNextInfoSection(content.order);
 
   return (
     <div className="font-jost mx-auto min-h-screen max-w-3xl py-2">
@@ -104,6 +118,13 @@ export default async function DynamicPage({ params }: { params: { slug: string }
       {slug === 'house' && (
         <div className="mt-16">
           <AmenitiesList />
+        </div>
+      )}
+      {nextSection && (
+        <div className="mb-16 text-center">
+          <Link href={`/${nextSection.identifier}`} className="text-md text-green-800">
+            {nextSection.linkText}
+          </Link>
         </div>
       )}
     </div>

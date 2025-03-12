@@ -2,8 +2,6 @@ import { defineQuery } from "next-sanity";
 
 export const settingsQuery = defineQuery(`*[_type == "settings"][0]`);
 
-
-
 export const sitemapData = defineQuery(`
   *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {
     "slug": slug.current,
@@ -11,7 +9,6 @@ export const sitemapData = defineQuery(`
     _updatedAt,
   }
 `);
-
 
 export const getAmenitiesQuery = defineQuery(`
   *[_type == "amenities"][0] {
@@ -22,14 +19,13 @@ export const getAmenitiesQuery = defineQuery(`
       icon
     }
   }
-`)
+`);
 
 export const getPhotosQuery = defineQuery(`
-  *[_type == "photos"][0] {
+  *[_type == "photos"][1] {
     "images": images[].asset->url
   }
-`)
-
+`);
 
 export const getInfoSectionsQuery = defineQuery(`
   *[_type == "infoSection"] | order(order asc) {
@@ -42,7 +38,7 @@ export const getInfoSectionsQuery = defineQuery(`
       "alt": image.alt
     }
   }
-`)
+`);
 
 export const getInfoSectionByIdQuery = defineQuery(`
   *[_type == "infoSection" && identifier == $identifier][0] {
@@ -51,12 +47,21 @@ export const getInfoSectionByIdQuery = defineQuery(`
     homepageContent,
     pageContent,
     linkText,
+    order,
     "image": {
       "src": image.asset->url,
       "alt": image.alt
     }
   }
-`)
+`);
+
+export const getNextInfoSectionQuery = defineQuery(`
+  *[_type == "infoSection" && order > $order] | order(order asc) [0] {
+    title,
+    identifier,
+    linkText
+  }
+`);
 
 export const getAvailabilityQuery = defineQuery(`
   *[_type == "availability"][0] {
@@ -68,4 +73,4 @@ export const getAvailabilityQuery = defineQuery(`
       note
     }
   }
-`)
+`);
