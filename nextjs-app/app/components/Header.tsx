@@ -37,7 +37,7 @@ export default function Header() {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="absolute top-2 right-2 text-yellow-900 focus:outline-none"
+              className="absolute top-4 right-3 text-yellow-900 focus:outline-none"
             >
               <svg
                 className="w-6 h-6"
