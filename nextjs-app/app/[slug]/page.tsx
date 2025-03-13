@@ -10,6 +10,7 @@ import AmenitiesList from "@/app/components/AmenitiesList";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
+
 interface InfoSection {
   title: string;
   identifier: string;
@@ -31,10 +32,10 @@ const portableTextComponents = {
           <Image
             src={imageUrl}
             alt={value.alt ?? "Decorative image"}
-            className=" w-full object-contain aspect-square"
+            className=" w-full object-cover overflow-hidden aspect-square"
             layout="fill"
-            objectFit="cover"
-            sizes="(max-width: 768px) 90vw, 20vw"
+            priority
+            sizes="(max-width: 768px) 90vw, 30vw"
           />
           {value.caption && (
             <figcaption className="mt-2 text-center text-sm text-muted-foreground">
@@ -96,8 +97,9 @@ async function getFirstInfoSection(): Promise<InfoSection | null> {
 }
 
 
-export default async function DynamicPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default async function DynamicPage({ params }: { params: { slug: string } | Promise<{ slug: string }> }) {
+  const resolvedParams = await params; // Ensure it's resolved
+  const { slug } = resolvedParams;
   const content = await getContentBySlug(slug);
 
   if (!content) {
