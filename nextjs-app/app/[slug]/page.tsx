@@ -95,13 +95,8 @@ async function getFirstInfoSection(): Promise<InfoSection | null> {
   }
 }
 
-interface DynamicPageProps {
-  params: {
-    slug: string;
-  };
-}
 
-export default async function DynamicPage({ params }: DynamicPageProps) {
+export default async function DynamicPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
   const content = await getContentBySlug(slug);
 

@@ -66,7 +66,7 @@ export default function Header() {
           </div>
           <div className="flex items-center md:hidden">
             <Link href="/" className=" mb-1 text-green-800">
-              Welcome to the <span className='font-kalnia font-semibold'>Green Grange</span> 
+              Welcome to the <span className='font-kalnia font-medium'>Green Grange</span> 
             </Link>
           </div>
           <ul className={`md:flex w-full justify-around text-md md:text-lg ${isOpen ? 'block' : 'hidden'}`}>
