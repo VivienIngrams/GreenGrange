@@ -96,10 +96,10 @@ async function getFirstInfoSection(): Promise<InfoSection | null> {
   }
 }
 
+type Params = Promise<{ slug: string }> | { slug: string };
 
-export default async function DynamicPage({ params }: { params: { slug: string } | Promise<{ slug: string }> }) {
-  const resolvedParams = await params; // Ensure it's resolved
-  const { slug } = resolvedParams;
+export default async function DynamicPage({ params }: { params: Params }) {
+  const { slug } = await params
   const content = await getContentBySlug(slug);
 
   if (!content) {
