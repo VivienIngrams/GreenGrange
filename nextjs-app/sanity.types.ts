@@ -519,14 +519,20 @@ export type SitemapDataResult = Array<{
 // Query: *[_type == "amenities"][0] {    title,    description,    items[] {      name,      icon    }  }
 export type GetAmenitiesQueryResult = null;
 // Variable: getPhotosQuery
-// Query: *[_type == "photos"][0] {    "images": images[].asset->url  }
+// Query: *[_type == "photos"][1] {    "images": images[].asset->url  }
 export type GetPhotosQueryResult = null;
 // Variable: getInfoSectionsQuery
 // Query: *[_type == "infoSection"] | order(order asc) {    title,    identifier,    homepageContent,    linkText,    "image": {      "src": image.asset->url,      "alt": image.alt    }  }
 export type GetInfoSectionsQueryResult = Array<never>;
 // Variable: getInfoSectionByIdQuery
-// Query: *[_type == "infoSection" && identifier == $identifier][0] {    title,    identifier,    homepageContent,    pageContent,    linkText,    "image": {      "src": image.asset->url,      "alt": image.alt    }  }
+// Query: *[_type == "infoSection" && identifier == $identifier][0] {    title,    identifier,    homepageContent,    pageContent,    linkText,    order,    "image": {      "src": image.asset->url,      "alt": image.alt    }  }
 export type GetInfoSectionByIdQueryResult = null;
+// Variable: getNextInfoSectionQuery
+// Query: *[_type == "infoSection" && order > $order] | order(order asc) [0] {    title,    identifier,    linkText  }
+export type GetNextInfoSectionQueryResult = null;
+// Variable: getFirstInfoSectionQuery
+// Query: *[_type == "infoSection"] | order(order asc) [0] {    title,    identifier,    linkText  }
+export type GetFirstInfoSectionQueryResult = null;
 // Variable: getAvailabilityQuery
 // Query: *[_type == "availability"][0] {    title,    description,    unavailablePeriods[] {      from,      to,      note    }  }
 export type GetAvailabilityQueryResult = null;
@@ -538,9 +544,11 @@ declare module "@sanity/client" {
     "*[_type == \"settings\"][0]": SettingsQueryResult;
     "\n  *[_type == \"page\" || _type == \"post\" && defined(slug.current)] | order(_type asc) {\n    \"slug\": slug.current,\n    _type,\n    _updatedAt,\n  }\n": SitemapDataResult;
     "\n  *[_type == \"amenities\"][0] {\n    title,\n    description,\n    items[] {\n      name,\n      icon\n    }\n  }\n": GetAmenitiesQueryResult;
-    "\n  *[_type == \"photos\"][0] {\n    \"images\": images[].asset->url\n  }\n": GetPhotosQueryResult;
+    "\n  *[_type == \"photos\"][1] {\n    \"images\": images[].asset->url\n  }\n": GetPhotosQueryResult;
     "\n  *[_type == \"infoSection\"] | order(order asc) {\n    title,\n    identifier,\n    homepageContent,\n    linkText,\n    \"image\": {\n      \"src\": image.asset->url,\n      \"alt\": image.alt\n    }\n  }\n": GetInfoSectionsQueryResult;
-    "\n  *[_type == \"infoSection\" && identifier == $identifier][0] {\n    title,\n    identifier,\n    homepageContent,\n    pageContent,\n    linkText,\n    \"image\": {\n      \"src\": image.asset->url,\n      \"alt\": image.alt\n    }\n  }\n": GetInfoSectionByIdQueryResult;
+    "\n  *[_type == \"infoSection\" && identifier == $identifier][0] {\n    title,\n    identifier,\n    homepageContent,\n    pageContent,\n    linkText,\n    order,\n    \"image\": {\n      \"src\": image.asset->url,\n      \"alt\": image.alt\n    }\n  }\n": GetInfoSectionByIdQueryResult;
+    "\n  *[_type == \"infoSection\" && order > $order] | order(order asc) [0] {\n    title,\n    identifier,\n    linkText\n  }\n": GetNextInfoSectionQueryResult;
+    "\n  *[_type == \"infoSection\"] | order(order asc) [0] {\n    title,\n    identifier,\n    linkText\n  }\n": GetFirstInfoSectionQueryResult;
     "\n  *[_type == \"availability\"][0] {\n    title,\n    description,\n    unavailablePeriods[] {\n      from,\n      to,\n      note\n    }\n  }\n": GetAvailabilityQueryResult;
   }
 }

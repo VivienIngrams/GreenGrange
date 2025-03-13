@@ -2,7 +2,6 @@ import { PortableText } from "@portabletext/react";
 import { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
 import { getInfoSectionByIdQuery, getNextInfoSectionQuery, getFirstInfoSectionQuery } from "@/sanity/lib/queries";
-
 import { urlForImage } from "@/sanity/lib/utils";
 import Image from "next/image";
 import { Typography } from "../components/Typography";
@@ -21,11 +20,7 @@ interface InfoSection {
 
 const portableTextComponents = {
   types: {
-    image: ({
-      value,
-    }: {
-      value: { alt?: string; caption?: string; asset?: { _ref: string } };
-    }) => {
+    image: ({ value }: { value: { alt?: string, caption?: string, asset?: { _ref: string } } }) => {
       if (!value.asset) return null;
 
       const imageUrl = urlForImage(value)?.url();
@@ -51,30 +46,14 @@ const portableTextComponents = {
     },
   },
   block: {
-    h1: ({ children }: { children?: React.ReactNode }) => (
-      <Typography.H1>{children}</Typography.H1>
-    ),
-    h2: ({ children }: { children?: React.ReactNode }) => (
-      <Typography.H2>{children}</Typography.H2>
-    ),
-    h3: ({ children }: { children?: React.ReactNode }) => (
-      <Typography.H3>{children}</Typography.H3>
-    ),
-    blockquote: ({ children }: { children?: React.ReactNode }) => (
-      <Typography.Blockquote>{children}</Typography.Blockquote>
-    ),
-    normal: ({ children }: { children?: React.ReactNode }) => (
-      <Typography.Paragraph>{children}</Typography.Paragraph>
-    ),
+    h1: ({ children }: { children?: React.ReactNode }) => <Typography.H1>{children}</Typography.H1>,
+    h2: ({ children }: { children?: React.ReactNode }) => <Typography.H2>{children}</Typography.H2>,
+    h3: ({ children }: { children?: React.ReactNode }) => <Typography.H3>{children}</Typography.H3>,
+    blockquote: ({ children }: { children?: React.ReactNode }) => <Typography.Blockquote>{children}</Typography.Blockquote>,
+    normal: ({ children }: { children?: React.ReactNode }) => <Typography.Paragraph>{children}</Typography.Paragraph>,
   },
   marks: {
-    link: ({
-      children,
-      value,
-    }: {
-      children: React.ReactNode;
-      value?: { href?: string };
-    }) => {
+    link: ({ children, value }: { children: React.ReactNode; value?: { href?: string } }) => {
       if (!value?.href) return <>{children}</>;
       return <Typography.Link href={value.href}>{children}</Typography.Link>;
     },
@@ -88,9 +67,7 @@ export const metadata: Metadata = {
 
 async function getContentBySlug(slug: string): Promise<InfoSection | null> {
   try {
-    const section = await client.fetch(getInfoSectionByIdQuery, {
-      identifier: slug,
-    });
+    const section = await client.fetch(getInfoSectionByIdQuery, { identifier: slug });
     return section || null;
   } catch (error) {
     console.error("Error fetching content:", error);
@@ -107,21 +84,24 @@ async function getNextInfoSection(order: number): Promise<InfoSection | null> {
     return null;
   }
 }
-async function getFirstInfoSection(): Promise<InfoSection | null> {
-    try {
-      const firstSection = await client.fetch(getFirstInfoSectionQuery);
-      return firstSection || null;
-    } catch (error) {
-      console.error("Error fetching first section:", error);
-      return null;
-    }
-  }
 
-export default async function DynamicPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+async function getFirstInfoSection(): Promise<InfoSection | null> {
+  try {
+    const firstSection = await client.fetch(getFirstInfoSectionQuery);
+    return firstSection || null;
+  } catch (error) {
+    console.error("Error fetching first section:", error);
+    return null;
+  }
+}
+
+interface DynamicPageProps {
+  params: {
+    slug: string;
+  };
+}
+
+export default async function DynamicPage({ params }: DynamicPageProps) {
   const { slug } = params;
   const content = await getContentBySlug(slug);
 
@@ -143,10 +123,7 @@ export default async function DynamicPage({
       <article className="mx-auto -mt-12 md:mt-4">
         <Typography.H1>{content.title}</Typography.H1>
         {content.pageContent ? (
-          <PortableText
-            value={content.pageContent}
-            components={portableTextComponents}
-          />
+          <PortableText value={content.pageContent} components={portableTextComponents} />
         ) : (
           <p>No content available.</p>
         )}
