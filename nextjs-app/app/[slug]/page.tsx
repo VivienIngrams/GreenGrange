@@ -98,10 +98,13 @@ async function getFirstInfoSection(): Promise<InfoSection | null> {
 
 type Params = Promise<{ slug: string }> | { slug: string };
 
-export default async function DynamicPage({ params }: { params: Params }) {
-  const { slug } = await params
+export default async function DynamicPage({ params }: { params: { slug: string } }) {
+  const slug = typeof params.slug === 'object' && 'then' in params.slug 
+    ? await params.slug 
+    : params.slug;
+    
   const content = await getContentBySlug(slug);
-
+  
   if (!content) {
     return (
       <div className="mx-auto min-h-screen max-w-3xl px-6 py-12">
