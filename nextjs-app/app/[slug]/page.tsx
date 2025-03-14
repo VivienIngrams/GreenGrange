@@ -18,6 +18,7 @@ import { ArrowRight } from "lucide-react";
 interface InfoSection {
   title: string;
   identifier: string;
+  homepageContent: any[];
   pageContent: any[];
   linkText: string;
   order: number;
@@ -36,13 +37,14 @@ const portableTextComponents = {
       if (!imageUrl) return null;
 
       return (
-        <figure className="my-2 relative aspect-square md:w-1/2 overflow-hidden ">
+        <figure className="my-2 relative aspect-square md:w-1/2 overflow-hidden rounded-sm ">
           <Image
             src={imageUrl}
             alt={value.alt ?? "Decorative image"}
-            className=" w-full object-contain aspect-square"
-            layout="fill"
-            objectFit="cover"
+            className=" w-full object-cover aspect-square"
+            fill
+            priority
+            
             sizes="(max-width: 768px) 90vw, 20vw"
           />
           {value.caption && (
@@ -69,24 +71,10 @@ const portableTextComponents = {
   },
 };
 
-export const metadata: Metadata = {
-  title: "Dynamic Page | The Green Grange",
-  description: "Dynamic content page for The Green Grange",
-};
-// export async function generateMetadata(props: {
-//   params: Params
-//   searchParams: SearchParams
-// }) {
-//   const params = await props.params
-//   const searchParams = await props.searchParams
-//   const slug = params.slug
-//   const query = searchParams.query
-// }
+
 async function getContentBySlug(slug: string): Promise<InfoSection | null> {
   try {
-    const section = await client.fetch(getInfoSectionByIdQuery, {
-      identifier: slug,
-    });
+    const section = await client.fetch(getInfoSectionByIdQuery, { identifier: slug });
     return section || null;
   } catch (error) {
     console.error("Error fetching content:", error);
@@ -123,8 +111,41 @@ async function getPhotosBySlug(slug: string): Promise<Photos | null> {
     return null;
   }
 }
+
 type Params = Promise<{ slug: string }>;
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
+
+export async function generateMetadata(props: {
+    params: Params
+    searchParams: SearchParams
+  }) {
+    const params = await props.params
+    const searchParams = await props.searchParams
+    const slug = params.slug
+    const query = searchParams.query
+  const content = await getContentBySlug(slug);
+
+  if (!content) {
+    return {
+      title: "Page Not Found",
+      description: "The page you are looking for does not exist.",
+    };
+  }
+
+  const description = content.homepageContent
+    .map((block) => {
+      if (block._type === "block" && block.children) {
+        return block.children.map((child: { text: string }) => child.text).join(" ");
+      }
+      return "";
+    })
+    .join(" ");
+
+  return {
+    title: content.title,
+    description: description || "No description available.",
+  };
+}
 
 export default async function DynamicPage(props: {
   params: Params;
@@ -136,7 +157,6 @@ export default async function DynamicPage(props: {
   const query = searchParams.query;
 
   const content = await getContentBySlug(slug);
-
 
   if (!content) {
     return (
@@ -180,15 +200,18 @@ export default async function DynamicPage(props: {
           </Link>
         </div>
       ) : (
-        firstSection && (
+        firstSection && ( 
           <div className="mt-16 text-center">
-            <Link href={`/${firstSection.identifier}`} className="group inline-flex items-center gap-2 text-lg font-semibold hover:text-green-700 transition-colors">
-              {firstSection.linkText}
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </div>
-        )
-      )}
-    </div>
-  );
+          <Link
+            href={`/${firstSection.identifier}`}
+            className="group inline-flex items-center gap-2 text-lg font-semibold hover:text-green-700 transition-colors"
+          >
+            {firstSection.linkText}
+            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
+      )
+    )}
+  </div>
+);
 }
