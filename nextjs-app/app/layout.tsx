@@ -56,7 +56,7 @@ export default  async function RootLayout({
             )}
             {/* The <SanityLive> component is responsible for making all sanityFetch calls in your application live, so should always be rendered. */}
             <SanityLive onError={handleError} />
-            <main className="mx-4 xl:mx-auto  mt-12 font-jost text-green-900 bg-[#e7f1e2]">
+            <main className="mx-4 xl:mx-auto  mt-12 font-jost text-green-900 bg-[#edf4ea]">
             <Header />
               {children}
             <Footer />
@@ -68,4 +68,3 @@ export default  async function RootLayout({
     </html>
   );
 }
-// bg-[#d9e6d3]

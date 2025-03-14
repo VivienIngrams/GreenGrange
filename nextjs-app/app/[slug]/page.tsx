@@ -174,7 +174,7 @@ export default async function DynamicPage(props: {
   const photos = await getPhotosBySlug(slug);
 
   return (
-    <div className="font-jost mx-auto min-h-screen max-w-3xl py-2">
+    <div className="font-jost mx-auto min-h-screen max-w-3xl py-2 bg-[#edf4ea]">
       <article className="mx-auto -mt-12 md:mt-4">
         <Typography.H1>{content.title}</Typography.H1>
         {content.pageContent ? (

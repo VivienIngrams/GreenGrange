@@ -30,7 +30,7 @@ export default function Header() {
   if (!navSections?.length) return null; // If there are no nav sections, return nothing
 
   return (
-    <header className="text-yellow-900 fixed z-20 top-0 left-0 w-full bg-[#e7f1e2]">
+    <header className="text-yellow-900 fixed z-20 top-0 left-0 w-full bg-[#edf4ea]">
       <div className="mx-auto px-4">
         <nav className="flex flex-col  items-center w-full py-4">
           <div className="md:hidden">
