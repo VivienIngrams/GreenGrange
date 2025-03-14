@@ -5,6 +5,7 @@ import {
   getInfoSectionByIdQuery,
   getNextInfoSectionQuery,
   getFirstInfoSectionQuery,
+  getPhotosQuery,
 } from "@/sanity/lib/queries";
 import { urlForImage } from "@/sanity/lib/utils";
 import Image from "next/image";
@@ -22,13 +23,13 @@ interface InfoSection {
   order: number;
 }
 
+interface Photos {
+  images: string[];
+}
+
 const portableTextComponents = {
   types: {
-    image: ({
-      value,
-    }: {
-      value: { alt?: string; caption?: string; asset?: { _ref: string } };
-    }) => {
+    image: ({ value }: { value: { alt?: string, caption?: string, asset?: { _ref: string } } }) => {
       if (!value.asset) return null;
 
       const imageUrl = urlForImage(value)?.url();
@@ -39,10 +40,10 @@ const portableTextComponents = {
           <Image
             src={imageUrl}
             alt={value.alt ?? "Decorative image"}
-            className=" w-full object-cover overflow-hidden aspect-square"
+            className=" w-full object-contain aspect-square"
             layout="fill"
-            priority
-            sizes="(max-width: 768px) 90vw, 30vw"
+            objectFit="cover"
+            sizes="(max-width: 768px) 90vw, 20vw"
           />
           {value.caption && (
             <figcaption className="mt-2 text-center text-sm text-muted-foreground">
@@ -54,30 +55,14 @@ const portableTextComponents = {
     },
   },
   block: {
-    h1: ({ children }: { children?: React.ReactNode }) => (
-      <Typography.H1>{children}</Typography.H1>
-    ),
-    h2: ({ children }: { children?: React.ReactNode }) => (
-      <Typography.H2>{children}</Typography.H2>
-    ),
-    h3: ({ children }: { children?: React.ReactNode }) => (
-      <Typography.H3>{children}</Typography.H3>
-    ),
-    blockquote: ({ children }: { children?: React.ReactNode }) => (
-      <Typography.Blockquote>{children}</Typography.Blockquote>
-    ),
-    normal: ({ children }: { children?: React.ReactNode }) => (
-      <Typography.Paragraph>{children}</Typography.Paragraph>
-    ),
+    h1: ({ children }: { children?: React.ReactNode }) => <Typography.H1>{children}</Typography.H1>,
+    h2: ({ children }: { children?: React.ReactNode }) => <Typography.H2>{children}</Typography.H2>,
+    h3: ({ children }: { children?: React.ReactNode }) => <Typography.H3>{children}</Typography.H3>,
+    blockquote: ({ children }: { children?: React.ReactNode }) => <Typography.Blockquote>{children}</Typography.Blockquote>,
+    normal: ({ children }: { children?: React.ReactNode }) => <Typography.Paragraph>{children}</Typography.Paragraph>,
   },
   marks: {
-    link: ({
-      children,
-      value,
-    }: {
-      children: React.ReactNode;
-      value?: { href?: string };
-    }) => {
+    link: ({ children, value }: { children: React.ReactNode; value?: { href?: string } }) => {
       if (!value?.href) return <>{children}</>;
       return <Typography.Link href={value.href}>{children}</Typography.Link>;
     },
@@ -128,6 +113,16 @@ async function getFirstInfoSection(): Promise<InfoSection | null> {
     return null;
   }
 }
+
+async function getPhotosBySlug(slug: string): Promise<Photos | null> {
+  try {
+    const photos = await client.fetch(getPhotosQuery, { slug });
+    return photos || null;
+  } catch (error) {
+    console.error("Error fetching photos:", error);
+    return null;
+  }
+}
 type Params = Promise<{ slug: string }>;
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
@@ -142,6 +137,7 @@ export default async function DynamicPage(props: {
 
   const content = await getContentBySlug(slug);
 
+
   if (!content) {
     return (
       <div className="mx-auto min-h-screen max-w-3xl px-6 py-12">
@@ -154,23 +150,21 @@ export default async function DynamicPage(props: {
 
   const nextSection = await getNextInfoSection(content.order);
   const firstSection = await getFirstInfoSection();
+  const photos = await getPhotosBySlug(slug);
 
   return (
     <div className="font-jost mx-auto min-h-screen max-w-3xl py-2">
       <article className="mx-auto -mt-12 md:mt-4">
         <Typography.H1>{content.title}</Typography.H1>
         {content.pageContent ? (
-          <PortableText
-            value={content.pageContent}
-            components={portableTextComponents}
-          />
+          <PortableText value={content.pageContent} components={portableTextComponents} />
         ) : (
           <p>No content available.</p>
         )}
       </article>
-      {(slug === "renovation" || slug === "house") && (
+      {photos && photos.images.length > 0 && (
         <div className="mt-16">
-          <PhotoGallery />
+          <PhotoGallery images={photos.images} />
         </div>
       )}
       {slug === "house" && (
@@ -180,10 +174,7 @@ export default async function DynamicPage(props: {
       )}
       {nextSection ? (
         <div className="mt-16 text-center">
-          <Link
-            href={`/${nextSection.identifier}`}
-            className="group inline-flex items-center gap-2 text-lg font-semibold hover:text-green-700 transition-colors"
-          >
+          <Link href={`/${nextSection.identifier}`} className="group inline-flex items-center gap-2 text-lg font-semibold hover:text-green-700 transition-colors">
             {nextSection.linkText}
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
           </Link>
@@ -191,10 +182,7 @@ export default async function DynamicPage(props: {
       ) : (
         firstSection && (
           <div className="mt-16 text-center">
-            <Link
-              href={`/${firstSection.identifier}`}
-              className="group inline-flex items-center gap-2 text-lg font-semibold hover:text-green-700 transition-colors"
-            >
+            <Link href={`/${firstSection.identifier}`} className="group inline-flex items-center gap-2 text-lg font-semibold hover:text-green-700 transition-colors">
               {firstSection.linkText}
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Link>

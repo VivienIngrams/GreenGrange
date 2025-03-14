@@ -43,11 +43,11 @@ export default async function HomePage() {
         </div>
       ))}
       
-      <div className="min-h-screen flex items-center justify-center bg-background">
+      {/* <div className="min-h-screen flex items-center justify-center bg-background">
         <div className=" max-w-6xl px-6">
           <AvailabilityCalendar />
         </div>
-      </div>
+      </div> */}
     </main>
   );
 }

@@ -25,13 +25,13 @@ export default function HeroSection() {
         </h1>
         <div className="inline-flex items-center gap-2 backdrop-blur-sm px-1 md:px-4 py-2 rounded-full  hover:bg-black/10 transition-all hover:scale-[1.02] ">
           <Link
-            href="https://maps.app.goo.gl/m4UppiXeNXT41AmN8"
+            href="https://www.google.fr/maps/place/1+Rue+du+Pressoir+Ferme,+10250+Gy%C3%A9-sur-Seine,+France/@48.0281961,4.4259429,554m/data=!3m2!1e3!4b1!4m6!3m5!1s0x47ec3371657dab45:0x3e3f3c29faa05c37!8m2!3d48.0281925!4d4.4285178!16s%2Fg%2F11fxt4qgm0?entry=ttu&g_ep=EgoyMDI1MDMxMS4wIKXMDSoASAFQAw%3D%3D"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 hover:text-white/90 transition-colors text-xs md:text-lg font-medium"
           >
             <MapPin className="h-5 w-5" />
-            4 rue des Vannes, 10250 Gye sur Seine
+            1b rue du Pressoir Ferme, 10250 Gye sur Seine
             <ArrowRight className="w-5 h-5" />
           </Link>
         </div>

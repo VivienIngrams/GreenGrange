@@ -43,7 +43,7 @@ export default async function AmenitiesList() {
           return (
             <li key={index} className="flex items-center ">
               <Icon className="mr-2 h-5 w-5 text-primary" />
-              <span className=" text-orange-950">{amenity.name}</span>
+              <span className=" text-yellow-950">{amenity.name}</span>
             </li>
           )
         })}

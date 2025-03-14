@@ -22,7 +22,7 @@ export const getAmenitiesQuery = defineQuery(`
 `);
 
 export const getPhotosQuery = defineQuery(`
-  *[_type == "photos"][1] {
+  *[_type == "photos" && slug == $slug][0] {
     "images": images[].asset->url
   }
 `);

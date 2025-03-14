@@ -5,7 +5,7 @@ export const Typography = {
       </h1>
     ),
     H2: ({ children }: { children: React.ReactNode }) => (
-      <h2 className="text-3xl font-medium text-orange-950 tracking-tight mb-6">
+      <h2 className="text-3xl font-medium text-yellow-950 tracking-tight mb-6">
         {children}
       </h2>
     ),
