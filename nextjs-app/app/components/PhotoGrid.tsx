@@ -48,7 +48,7 @@ export function PhotoGrid({ images }: PhotoGridProps) {
               alt={`Gallery Image ${index + 1}`}
               width={500}
               height={500} // Placeholder size, maintains aspect ratio
-              className="w-full h-auto object-cover mb-4"
+              className="w-full h-auto object-cover mb-4 rounded-sm"
               loading="lazy"
             />
           </Link>

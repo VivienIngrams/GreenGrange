@@ -19,7 +19,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-black/15 z-0"></div>
       {/* Content */}
       <div className="h-full w-full absolute inset-0 flex items-center justify-center">
-      <div className=" md:mx-auto md:max-w-5xl text-center text-white relative z-10">
+      <div className=" md:mx-auto md:max-w-5xl text-center text-[#f5faf2] relative z-10">
         <h1 className="text-[55px] leading-[1] font-kalnia font-normal md:text-8xl tracking-tighter  my-8">
           The Green Grange
         </h1>

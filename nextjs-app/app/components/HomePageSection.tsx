@@ -32,13 +32,13 @@ export default function HomePageSection({ data, index }: HomePageSectionProps) {
        
 
         {/* Content Section */}
-        <div className="w-full text-green-800">
+        <div className="w-full text-green-900">
           <h2 className="text-2xl md:text-4xl font-kalnia font-semibold mb-4">{data.title}</h2>
-          <div className="text-gray-800  mb-4">
+          <div className="text-yellow-950  mb-4">
             <PortableText value={data.homepageContent} />
           </div>
           <div
-            className="group inline-flex items-center gap-2 text-lg font-semibold hover:text-green-700 transition-colors"
+            className="group inline-flex items-center gap-2 text-lg font-semibold hover:text-green-800 transition-colors"
           >
             {data.linkText}
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />

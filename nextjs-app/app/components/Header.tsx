@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import Link from 'next/link';
-import { useState } from 'react';
-import { client } from '@/sanity/lib/client';
-import { getInfoSectionsQuery } from '@/sanity/lib/queries';
-import { useEffect } from 'react';
+import Link from "next/link";
+import { useState } from "react";
+import { client } from "@/sanity/lib/client";
+import { getInfoSectionsQuery } from "@/sanity/lib/queries";
+import { useEffect } from "react";
 
 interface NavInfoSection {
   title: string;
@@ -30,10 +30,9 @@ export default function Header() {
   if (!navSections?.length) return null; // If there are no nav sections, return nothing
 
   return (
-    <header className="text-yellow-900 fixed z-20 top-0 left-0 w-full bg-white">
+    <header className="text-yellow-900 fixed z-20 top-0 left-0 w-full bg-[#e7f1e2]">
       <div className="mx-auto px-4">
         <nav className="flex flex-col  items-center w-full py-4">
-         
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -65,19 +64,27 @@ export default function Header() {
             </button>
           </div>
           <div className="flex items-center md:hidden">
-            <Link href="/" className=" mb-1 text-green-800">
-              Welcome to the <span className='font-kalnia font-medium'>Green Grange</span> 
+            <Link href="/" className=" mb-1 text-green-900">
+              Welcome to the{" "}
+              <span className="font-kalnia font-medium">Green Grange</span>
             </Link>
           </div>
-          <ul className={`md:flex w-full justify-around text-md md:text-lg ${isOpen ? 'block' : 'hidden'}`}>
-          <div className="hidden md:flex items-center">
-            <Link href="/" className=" mb-1 text-green-800">
-              Welcome to the <span className='font-kalnia font-semibold'>Green Grange</span> 
-            </Link>
-          </div>
-           {navSections.map((section) => (
+          <ul
+            className={`md:flex w-full justify-around text-md md:text-lg ${isOpen ? "block" : "hidden"}`}
+            onClick={() => setIsOpen(false)}
+          >
+            <div className="hidden md:flex items-center">
+              <Link href="/" className=" mb-1 text-green-900">
+                Welcome to the{" "}
+                <span className="font-kalnia font-semibold">Green Grange</span>
+              </Link>
+            </div>
+            {navSections.map((section) => (
               <li key={section.identifier} className="md:ml-4 ">
-                <Link href={`/${section.identifier}`} className=" text-center block py-2 md:py-0">
+                <Link
+                  href={`/${section.identifier}`}
+                  className=" text-center block py-2 md:py-0"
+                >
                   {section.title}
                 </Link>
               </li>
