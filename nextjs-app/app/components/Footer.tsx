@@ -1,4 +1,4 @@
-import { LockKeyhole } from "lucide-react"
+
 
 export default function Footer() {
   return (
@@ -11,13 +11,7 @@ export default function Footer() {
           </a>
         </p>
       </div>
-      <div>
-        <a href="https://green-grange-studio.vercel.app/structure"
-        target="_blank" rel="noopener noreferrer" className="absolute bottom-4 right-4 text-[#d3e6c4] ">
-          <LockKeyhole size={24} />
-        </a>
       
-      </div>
     </footer>
   )
 }

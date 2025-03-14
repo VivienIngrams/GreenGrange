@@ -1,10 +1,11 @@
-// HomePage.tsx
-import AvailabilityCalendar from "@/app/components/AvailabilityCalendar";
+
+// import AvailabilityCalendar from "@/app/components/AvailabilityCalendar";
 import HeroSection from "@/app/components/HeroSection";
 import HomePageSection from "@/app/components/HomePageSection";
 import { PortableTextBlock } from "@portabletext/react";
 import { getInfoSectionsQuery } from "@/sanity/lib/queries";
 import { client } from "@/sanity/lib/client";
+import { LockKeyhole } from "lucide-react"
 
 interface HomePageInfoSectionData {
   title: string;
@@ -27,7 +28,7 @@ export default async function HomePage() {
   const infoSections = await getInfoSections();
   
   return (
-    <main className="min-h-screen bg-[#edf4ea]">
+    <main className="min-h-screen relative bg-[#edf4ea]">
       <HeroSection />
       
       {infoSections.map((section: HomePageInfoSectionData, index: number) => (
@@ -42,7 +43,13 @@ export default async function HomePage() {
           </div>
         </div>
       ))}
+      <div className="">
+        <a href="https://green-grange-studio.vercel.app/structure"
+        target="_blank" rel="noopener noreferrer" className="absolute -bottom-20 right-0 text-[#d3e6c4] ">
+          <LockKeyhole size={24} />
+        </a>
       
+      </div>
       {/* <div className="min-h-screen flex items-center justify-center bg-background">
         <div className=" max-w-6xl px-6">
           <AvailabilityCalendar />
