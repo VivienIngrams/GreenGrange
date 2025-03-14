@@ -6,7 +6,6 @@ import { Jost, Kalnia } from "next/font/google";
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity";
 import { Toaster } from "sonner";
-import { ThemeProvider } from "@/app/components/theme-provider";
 import { cn } from "@/app/lib/utils"
 
 import DraftModeToast from "@/app/components/DraftModeToast";
@@ -44,12 +43,7 @@ export default  async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={cn(jost.variable, kalnia.variable, "min-h-screen bg-background antialiased")}>
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+      
           <section className="min-h-screen">
             {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
             <Toaster />
@@ -69,7 +63,7 @@ export default  async function RootLayout({
             </main>
           </section>
           <SpeedInsights />
-        </ThemeProvider>
+        
       </body>
     </html>
   );
