@@ -44,7 +44,7 @@ export default  async function RootLayout({
     <html lang="en" suppressHydrationWarning className={cn(jost.variable, kalnia.variable, "min-h-screen bg-background antialiased")}>
       <body>
       
-          <section className="min-h-screen">
+          <section className="min-h-screen bg-[#edf4ea]">
             {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
             <Toaster />
             {isDraftMode && (
@@ -56,7 +56,7 @@ export default  async function RootLayout({
             )}
             {/* The <SanityLive> component is responsible for making all sanityFetch calls in your application live, so should always be rendered. */}
             <SanityLive onError={handleError} />
-            <main className="mx-4 xl:mx-auto  mt-12 font-jost text-green-900 bg-[#edf4ea]">
+            <main className="mx-4 xl:mx-auto  mt-12 font-jost text-green-900 ">
             <Header />
               {children}
             <Footer />
