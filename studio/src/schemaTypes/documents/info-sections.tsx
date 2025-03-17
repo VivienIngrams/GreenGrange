@@ -17,13 +17,13 @@ export const infoSections = defineType({
       name: 'identifier',
       title: 'Identifier',
       type: 'string',
-      description: 'A unique identifier for this section (e.g., "renovation", "nearby")',
+      description: 'No need to change this pleae! It is a unique identifier for this section (e.g., "renovation", "nearby")',
       validation: (Rule: any) => Rule.required()
     }),
     defineField({
       name: 'homepageContent',
       title: 'Homepage Preview Content',
-      description: 'Brief content shown on the homepage',
+      description: 'Brief content shown on the homepage section',
       type: 'array',
       of: [{ type: 'block' }],
       validation: (Rule: any) => Rule.required()
@@ -31,7 +31,7 @@ export const infoSections = defineType({
     defineField({
       name: 'pageContent',
       title: 'Full Page Content',
-      description: 'Detailed content for the individual page',
+      description: 'Detailed content for the individual page (to make a line break or space beteween paragraphs, press "Shift + Enter")',
       type: 'array',
       of: [
         {

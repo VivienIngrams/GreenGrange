@@ -9,7 +9,7 @@ import { Toaster } from "sonner";
 import { cn } from "@/app/lib/utils"
 
 import DraftModeToast from "@/app/components/DraftModeToast";
-import Footer from "@/app/components/Footer";
+
 import Header from "@/app/components/Header";
 import { SanityLive } from "@/sanity/lib/live";
 
@@ -59,7 +59,7 @@ export default  async function RootLayout({
             <main className="mx-4 xl:mx-auto  mt-12 font-jost text-green-900 ">
             <Header />
               {children}
-            <Footer />
+            {/* <Footer /> */}
             </main>
           </section>
           <SpeedInsights />

@@ -45,7 +45,7 @@ export default async function HomePage() {
       ))}
       <div className="">
         <a href="https://green-grange-studio.vercel.app/structure"
-        target="_blank" rel="noopener noreferrer" className="absolute -bottom-20 right-0 text-[#d3e6c4] ">
+        target="_blank" rel="noopener noreferrer" className="z-20 absolute bottom-4 right-6 text-[#d3e6c4] ">
           <LockKeyhole size={24} />
         </a>
       
