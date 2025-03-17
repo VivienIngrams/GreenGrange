@@ -32,7 +32,7 @@ export function PhotoGrid({ images }: PhotoGridProps) {
   return (
     <>
       {/* Masonry Grid using CSS Columns */}
-      <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+      <div className="columns-1 sm:columns-2 md:columns-3  gap-4 space-y-4">
         {images.map((imageUrl, index) => (
           <Link
             href={imageUrl}
@@ -60,7 +60,7 @@ export function PhotoGrid({ images }: PhotoGridProps) {
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
           <div className="relative max-w-4xl max-h-[90vh] flex items-center justify-center">
             <button
-              className="absolute left-4 text-white text-3xl md:text-5xl"
+              className="absolute -bottom-12 md:bottom-4 left-4 md:-left-8 text-white text-3xl md:text-5xl "
               onClick={showPrevImage}
             >
               &lt;
@@ -75,14 +75,14 @@ export function PhotoGrid({ images }: PhotoGridProps) {
             />
 
             <button
-              className="absolute right-4 text-white text-3xl md:text-5xl"
+              className="absolute -bottom-12 md:bottom-4 right-4 md:-right-8 text-white text-3xl md:text-5xl "
               onClick={showNextImage}
             >
               &gt;
             </button>
 
             <button
-              className="absolute top-4 right-4 bg-black bg-opacity-50 text-white p-2 rounded-full"
+              className="absolute -top-8 right-4 md:-right-8 text-white text-xl md:text-3xl"
               onClick={() => setSelectedImage(null)}
               aria-label="Close viewer"
             >
