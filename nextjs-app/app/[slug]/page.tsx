@@ -228,11 +228,9 @@ export default async function DynamicPage(props: {
               height: 0,
               paddingTop: "56.25%",
               paddingBottom: 0,
-              boxShadow: "0 2px 8px 0 rgba(63,69,81,0.16)",
               marginTop: "1.6em",
               marginBottom: "0.9em",
               overflow: "hidden",
-              borderRadius: "8px",
               willChange: "transform",
             }}
           >
