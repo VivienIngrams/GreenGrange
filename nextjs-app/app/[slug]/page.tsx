@@ -208,11 +208,12 @@ export default async function DynamicPage(props: {
           <p>No content available.</p>
         )}
       </article>
-      {photos && photos.images.length > 0 && (
+      {photos && photos.images && photos?.images?.length > 0 && (
         <div className="mt-16">
           <PhotoGallery images={photos.images} />
         </div>
       )}
+
       {slug === "house" && (
         <div className="mt-16">
           <AmenitiesList />
@@ -255,7 +256,7 @@ export default async function DynamicPage(props: {
         </div>
       )}
       {nextSection ? (
-        <div className="mt-16 text-center">
+        <div className="my-16 text-center">
           <Link
             href={`/${nextSection.identifier}`}
             className="group inline-flex items-center gap-2 text-lg font-semibold hover:text-green-700 transition-colors"
@@ -266,7 +267,7 @@ export default async function DynamicPage(props: {
         </div>
       ) : (
         firstSection && (
-          <div className="mt-16 text-center">
+          <div className="my-16 text-center">
             <Link
               href={`/${firstSection.identifier}`}
               className="group inline-flex items-center gap-2 text-lg font-semibold hover:text-green-700 transition-colors"
